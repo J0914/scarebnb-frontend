@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect } from "react-router-dom";
 import { loginUser } from '../../store/session'
+import styles from './LoginForm.module.css'
 
 const LoginFormPage = () => {
   const [credential, setCredential] = useState('');
@@ -9,6 +10,7 @@ const LoginFormPage = () => {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector(state => state.session.user)
 
   if (sessionUser) return (
@@ -19,6 +21,11 @@ const LoginFormPage = () => {
     e.preventDefault();
     setErrors([]);
     return dispatch(loginUser({ credential, password }))
+      .then(async () => {
+        setCredential('');
+        setPassword('');
+        history.push('/');
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -30,7 +37,7 @@ const LoginFormPage = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
       <ul>
-        {errors.length > 0 && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.length > 0 && errors.map((error, idx) => <li className={styles.errors} key={idx}>{error}</li>)}
       </ul>
         <div>
           <label htmlFor="credential">Username or Email:</label>
