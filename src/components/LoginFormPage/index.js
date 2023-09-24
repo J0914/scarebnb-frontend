@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Redirect } from "react-router-dom";
 import { loginUser } from '../../store/session'
 
 const LoginFormPage = () => {
@@ -9,24 +9,29 @@ const LoginFormPage = () => {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user)
 
-  const onSubmit = async (e) => {
+  if (sessionUser) return (
+    <Redirect to="/" />
+  );
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const credentials = {
-      credential,
-      password
-    }
-
-    const login = await dispatch(loginUser(credentials));
-    console.log('in login form', login)
+    setErrors([]);
+    return dispatch(loginUser({ credential, password }))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   }
 
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
+      <ul>
+        {errors.length > 0 && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+      </ul>
         <div>
           <label htmlFor="credential">Username or Email:</label>
           <input 
