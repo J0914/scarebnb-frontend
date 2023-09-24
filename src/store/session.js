@@ -13,14 +13,23 @@ const removeUser = () => ({
 })
 
 export const loginUser = (credentials) => async dispatch => {
+  console.log('made it to the thunk')
+  console.log(credentials)
   const res = await csrfFetch('/api/session', {
     method: 'POST',
     body: JSON.stringify(credentials)
   })
-
-  if (res.ok){
+  console.log('got a response back', res)
+  if (res.ok ){
+    console.log('res.ok')
     const user = await res.json();
     dispatch(addUser(user));
+    return true;
+  } else {
+    console.log('res not okay')
+    const errs = await res.json();
+    console.log('in the thunk errs', errs)
+    return errs;
   }
 };
 
