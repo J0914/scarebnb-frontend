@@ -1,0 +1,64 @@
+.errors {
+  list-style-type: none;
+  color: red;
+  font-size: .8rem;
+}
+
+.loginFormContainer{
+  padding: 20px;
+  width: 350px;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.label{
+    padding: 3px;
+    font-weight: bolder;   
+}
+
+.inputContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input{
+  width: 95%;
+  height: 2rem;
+  border: solid 1px black;
+}
+
+#credential{
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  border-bottom: none;
+}
+
+#password{
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.buttonContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#submitButton{
+  width: 95%;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  background-color: #df1461;
+  color: white;
+  font-weight: 800;
+  margin: 10px;
+}
+
+input:focus{
+  background-color: rgb(240, 240, 240);
+}

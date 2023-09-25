@@ -12,25 +12,29 @@ const removeUser = () => ({
   type: LOGOUT
 })
 
+export const signupUser = (user) => async dispatch => {
+  const res = await csrfFetch('/api/users', {
+    method: 'POST',
+    body: JSON.stringify(user)
+  })
+
+  if (res.ok){
+    const user = await res.json();
+    dispatch(setUser(user));
+    return true;
+  } else return false;
+};
+
 export const loginUser = (credentials) => async dispatch => {
-  console.log('made it to the thunk')
-  console.log(credentials)
   const res = await csrfFetch('/api/session', {
     method: 'POST',
     body: JSON.stringify(credentials)
   })
-  console.log('got a response back', res)
   if (res.ok) {
-    console.log('res.ok')
     const user = await res.json();
     dispatch(setUser(user));
     return true;
-  } else {
-    console.log('res not okay')
-    const errs = await res.json();
-    console.log('in the thunk errs', errs)
-    return errs;
-  }
+  } else return false;
 };
 
 export const restoreUser = () => async dispatch => {
