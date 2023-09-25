@@ -23,20 +23,25 @@ const SignupFormModal = ({ setParentIsOpen }) => {
       width: 'fit-content',
       display: 'flex',
       flexDirection: 'column',
+      borderRadius: '10px'
     },
   };
 
   return (
     <>
-      <button className={styles.signupButton} onClick={setModalIsOpenToTrue} >Signup</button>
+      <button className={styles.signupButton} onClick={setModalIsOpenToTrue}>Signup</button>
       <Modal
         isOpen={modalIsOpen}
         style={customStyles}
         onRequestClose={setModalIsOpenToFalse}
         shouldCloseOnOverlayClick={true}
+        ariaHideApp={false}
       >
-        <button onClick={setModalIsOpenToFalse}>x</button>
-        <SignupForm />
+        <div id={styles.formHeader}>
+        <span onClick={setModalIsOpenToFalse} class="material-symbols-outlined">close</span>
+        <span id={styles.signUp}>Sign up</span>
+        </div>
+        <SignupForm setParentIsOpen={setParentIsOpen} />
       </Modal>
     </>
   )

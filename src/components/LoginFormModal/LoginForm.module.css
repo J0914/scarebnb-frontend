@@ -1,3 +1,13 @@
+#formHeader{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #717171;
+  margin: 10px 0;
+}
+
 .errors {
   list-style-type: none;
   color: red;
@@ -63,8 +73,13 @@ input{
   color: orangered;
 }
 
+#login{
+  margin: auto;
+}
+
 #submitButton{
   /* #df1461 */
+  height: 35px;
   width: 95%;
   padding: 6px;
   border-radius: 6px;
@@ -73,6 +88,10 @@ input{
   font-weight: 800;
   margin: 10px;
   background-color: orangered;
+}
+
+#submitButton:hover{
+  background-color: #717171;
 }
 
 input:focus{

@@ -23,6 +23,7 @@ const LoginFormModal = ({ setParentIsOpen }) => {
       width: 'fit-content',
       display: 'flex',
       flexDirection: 'column',
+      borderRadius: '10px'
     },
   };
 
@@ -35,9 +36,13 @@ const LoginFormModal = ({ setParentIsOpen }) => {
         style={customStyles}
         onRequestClose={setModalIsOpenToFalse}
         shouldCloseOnOverlayClick={true}
+        ariaHideApp={false}
       >
-        <button onClick={setModalIsOpenToFalse}>x</button>
-        <LoginForm />
+        <div id={styles.formHeader}>
+        <span onClick={setModalIsOpenToFalse} class="material-symbols-outlined">close</span>
+        <span id={styles.login}>Login</span>
+        </div>
+        <LoginForm setParentIsOpen={setParentIsOpen}/>
       </Modal>
     </>
   )

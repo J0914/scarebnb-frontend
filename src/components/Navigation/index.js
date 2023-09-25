@@ -14,7 +14,10 @@ function Navigation({ isLoaded }) {
         <NavLink to='/'><img className={styles.logo} src='https://i.ibb.co/QCqyySJ/logo.png' /></NavLink>
         <NavLink className={styles.logoText} exact to="/">Scarebnb</NavLink>
       </div>
-      <input id={styles.searchBar} type='search' placeholder='Search For A Haunt' />
+      <div className={styles.searchContainer}>
+      <input id={styles.searchBar} type='search' placeholder='Search For A Haunt'  />
+      <span id={styles.searchButton} class="material-symbols-outlined">search</span>
+      </div>
       <ProfileButton isLoaded={isLoaded} user={sessionUser} />
     </nav>
   );

@@ -4,7 +4,7 @@ import { signupUser } from "../../store/session";
 import styles from './SignupForm.module.css'
 
 
-const SignupForm = () => {
+const SignupForm = ({setParentIsOpen}) => {
   const [first_name, setFirst_name] = useState('');
   const [last_name, setLast_name] = useState('');
   const [username, setUsername] = useState('');
@@ -27,12 +27,13 @@ const SignupForm = () => {
         email,
         password
       }))
+        .then(setParentIsOpen(false))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
     } else {
-      const errs = ['Whoops! Your passwords don\'t match.'];
+      const errs = ['Boo! Your passwords don\'t match.'];
       setErrors(errs)
     }
   };

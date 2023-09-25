@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from '../../store/session'
 import styles from './LoginForm.module.css'
 
-const LoginForm = () => {
+const LoginForm = ({setParentIsOpen}) => {
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -14,6 +14,7 @@ const LoginForm = () => {
     e.preventDefault();
     setErrors([]);
     return dispatch(loginUser({ credential, password }))
+      .then(setParentIsOpen(false))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
