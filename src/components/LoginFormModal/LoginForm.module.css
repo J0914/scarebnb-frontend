@@ -48,15 +48,31 @@ input{
   align-items: center;
 }
 
+.loginButton{
+  background: none;
+  border: none;
+  font-weight: bold;
+  height: 40px;
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.loginButton:hover{
+  background-color: rgb(240, 240, 240);
+  color: orangered;
+}
+
 #submitButton{
+  /* #df1461 */
   width: 95%;
   padding: 6px;
   border-radius: 6px;
   border: none;
-  background-color: #df1461;
   color: white;
   font-weight: 800;
   margin: 10px;
+  background-color: orangered;
 }
 
 input:focus{

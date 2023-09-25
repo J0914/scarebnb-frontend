@@ -63,12 +63,27 @@ input{
   align-items: center;
 }
 
+.signupButton{
+  background: none;
+  border: none;
+  font-weight: bold;
+  margin-top: 15px;
+  height: 40px;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.signupButton:hover{
+  background-color: rgb(240, 240, 240);
+  color: orangered;
+}
+
 #submitButton{
   width: 95%;
   padding: 6px;
   border-radius: 6px;
   border: none;
-  background-color: #df1461;
+  background-color: orangered;
   color: white;
   font-weight: 800;
   margin: 10px;

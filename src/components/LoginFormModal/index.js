@@ -1,20 +1,46 @@
 import React, { useState } from 'react';
-import { Modal } from '../../context/Modal';
+import Modal from 'react-modal';
 import LoginForm from './LoginForm';
+import styles from './LoginForm.module.css'
 
-function LoginFormModal() {
-  const [showModal, setShowModal] = useState(false);
+const LoginFormModal = ({ setParentIsOpen }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const setModalIsOpenToTrue = () => {
+    setModalIsOpen(true)
+  }
+
+  const setModalIsOpenToFalse = () => {
+    setModalIsOpen(false)
+    setParentIsOpen(false)
+  }
+
+  const customStyles = {
+    content: {
+      position: 'absolute',
+      margin: 'auto auto',
+      height: 'fit-content',
+      width: 'fit-content',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+  };
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <LoginForm />
-        </Modal>
-      )}
+      <button className={styles.loginButton} onClick={setModalIsOpenToTrue} >Login</button>
+
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        onRequestClose={setModalIsOpenToFalse}
+        shouldCloseOnOverlayClick={true}
+      >
+        <button onClick={setModalIsOpenToFalse}>x</button>
+        <LoginForm />
+      </Modal>
     </>
-  );
-}
+  )
+};
 
 export default LoginFormModal;
