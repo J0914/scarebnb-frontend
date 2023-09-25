@@ -73,7 +73,7 @@ input{
 }
 
 .signupButton{
-  background: none;
+  background-color: white;
   border: none;
   font-weight: bold;
   margin-top: 15px;

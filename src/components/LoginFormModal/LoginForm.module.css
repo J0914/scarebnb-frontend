@@ -59,7 +59,7 @@ input{
 }
 
 .loginButton{
-  background: none;
+  background-color: white;
   border: none;
   font-weight: bold;
   height: 40px;
