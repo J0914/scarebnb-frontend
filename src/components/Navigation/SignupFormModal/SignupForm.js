@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { signupUser } from "../../store/session";
+import { signupUser } from "../../../store/session";
 import styles from './SignupForm.module.css'
 
 

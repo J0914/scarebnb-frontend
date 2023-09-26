@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+import LoginFormModal from './LoginFormModal';
+import SignupFormModal from './SignupFormModal';
 import styles from './Navigation.module.css'
 import Modal from 'react-modal'
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from '../../store/session'
+import { loginUser } from '../../../store/session'
 import styles from './LoginForm.module.css'
 
 const LoginForm = ({setParentIsOpen}) => {

@@ -1,7 +1,7 @@
 import styles from './HauntCard.module.css'
-import { images } from '../../mockimages/images';
+import { images } from '../../../mockimages/images';
 import { useState } from 'react';
-import Slideshow from '../Slideshow';
+import Slideshow from './Slideshow';
 
 const HauntCard = ({haunt}) => {
   haunt.Images = images;
