@@ -1,8 +1,21 @@
 /* TODO Add site wide styles */
+/* 13in size 1280 × 800 */
+/* avg tablet screen size 760 x 1024*/
 
-
-
-*{
-  font-family: 'Montserrat', sans-serif;
+* {
+  font-family: 'Montserrat', 'Montserrat Alternates', 'Oswald', sans-serif;
   font-weight: 500;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }

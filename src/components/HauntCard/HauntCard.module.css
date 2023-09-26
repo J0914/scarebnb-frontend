@@ -1,0 +1,14 @@
+.hauntCard_container{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px;
+  max-width: 400px;
+  min-width: 350px;
+}
+
+.coverImage{
+  width: 100%;
+}
+

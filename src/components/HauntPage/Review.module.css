@@ -1,0 +1,10 @@
+#reviewHeader{
+  display: flex;
+  flex-direction: column;
+}
+
+#reviewContainer{
+  width: 45%;
+  padding: 10px;
+  margin: 10px;
+}

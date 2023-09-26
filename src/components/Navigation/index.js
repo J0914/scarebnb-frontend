@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
       </div>
       <div className={styles.searchContainer}>
       <input id={styles.searchBar} type='search' placeholder='Search For A Haunt'  />
-      <span id={styles.searchButton} class="material-symbols-outlined">search</span>
+        <span id={styles.searchButton} className="material-symbols-outlined">search</span>
       </div>
       <ProfileButton isLoaded={isLoaded} user={sessionUser} />
     </nav>

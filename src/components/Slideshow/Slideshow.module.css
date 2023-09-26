@@ -1,0 +1,42 @@
+.slideshowContainer{
+  position: relative;
+  width: 100%;
+}
+
+#leftButton{
+  position: absolute;
+  top: 40%;
+  left: 5px;
+  border-radius: 50%;
+  padding: 5px;
+  opacity: 70%;
+  color: orangered;
+  transition: all .2s ease-in-out;
+}
+
+#leftButton:hover{
+  transform: scale(1.2);
+  color: white;
+}
+
+#rightButton{
+  position: absolute;
+  top: 40%;
+  right: 5px;
+  border-radius: 50%;
+  padding: 5px;
+  opacity: 70%;
+  color: orangered;
+  transition: all .2s ease-in-out;
+}
+
+#rightButton:hover{
+  transform: scale(1.2);
+  color: white;
+}
+
+.coverImage{
+  box-sizing: border-box;
+  width: 390px;
+  height: 264px;
+}

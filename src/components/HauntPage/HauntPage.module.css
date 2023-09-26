@@ -1,0 +1,116 @@
+#pageWrapper {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  grid-template-areas:
+    '. body .';
+}
+
+#body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 1084px;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 20px;
+}
+
+#headerTitle {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+#headerLocation {
+  margin-left: 15px;
+}
+
+#favoriteContainer {
+  display: flex;
+  align-items: center;
+}
+
+#imagesContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'first second third'
+    'first fourth fifth'
+  ;
+  margin: 20px auto;
+}
+
+#first {
+  grid-area: first;
+  width: 591px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+#second {
+  grid-area: second;
+}
+
+#third {
+  grid-area: third;
+  border-top-right-radius: 25px;
+}
+
+#fourth {
+  grid-area: fourth;
+}
+
+#fifth {
+  grid-area: fifth;
+  border-bottom-right-radius: 25px;
+}
+
+#second,
+#third,
+#fourth,
+#fifth {
+  width: 95%;
+  max-height: 193px;
+  min-height: 193px;
+  min-width: 260px;
+  max-width: 260px;
+}
+
+.images {
+  padding: 4px;
+}
+
+#hauntInfo {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+#hauntDescription{
+  border-top: 1px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
+  padding: 10px 0;
+  margin: 10px 0;
+}
+
+#description{
+  width: 100%;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-lines: 5;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+}
+
+#reviewContainer{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  margin: 0 10px;
+}

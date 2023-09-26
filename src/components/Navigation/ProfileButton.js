@@ -40,8 +40,8 @@ const ProfileButton = ({ user, isLoaded }) => {
 
   return (
     <div className={styles.profileContainer}>
-      <span onClick={setModalIsOpenToTrue} id={styles.menuButton} class="material-symbols-outlined">menu</span>
-      <span onClick={setModalIsOpenToTrue} id={styles.profileButton} class="material-symbols-outlined">account_circle</span>
+      <span onClick={setModalIsOpenToTrue} id={styles.menuButton} className="material-symbols-outlined">menu</span>
+      <span onClick={setModalIsOpenToTrue} id={styles.profileButton} className="material-symbols-outlined">account_circle</span>
       <Modal
         isOpen={modalIsOpen}
         className={styles.modalStyle}

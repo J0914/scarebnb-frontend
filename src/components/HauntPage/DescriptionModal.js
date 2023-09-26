@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import LoginForm from './LoginForm';
-import styles from './LoginForm.module.css'
+import styles from './DescriptionModal.module.css'
 
-const LoginFormModal = ({ setParentIsOpen }) => {
+const DescriptionModal = ({ description }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const setModalIsOpenToTrue = () => {
@@ -12,25 +11,25 @@ const LoginFormModal = ({ setParentIsOpen }) => {
 
   const setModalIsOpenToFalse = () => {
     setModalIsOpen(false)
-    setParentIsOpen(false)
   }
 
   const customStyles = {
     content: {
       position: 'absolute',
       margin: 'auto auto',
-      height: 'fit-content',
-      width: 'fit-content',
+      height: '75%',
+      width: '50%',
       display: 'flex',
       flexDirection: 'column',
-      borderRadius: '10px'
+      borderRadius: '10px',
+      overflow: 'auto',
+      overflowX: 'hidden'
     },
   };
 
   return (
     <>
-      <button className={styles.loginButton} onClick={setModalIsOpenToTrue} >Login</button>
-
+      <span className={styles.descriptionButton} onClick={setModalIsOpenToTrue} >Show More <span id={styles.rightButton} className="material-symbols-outlined">arrow_forward_ios</span></span>
       <Modal
         isOpen={modalIsOpen}
         style={customStyles}
@@ -38,14 +37,14 @@ const LoginFormModal = ({ setParentIsOpen }) => {
         shouldCloseOnOverlayClick={true}
         ariaHideApp={false}
       >
-        <div id={styles.formHeader}>
+        <div id={styles.descriptionHeader}>
           <span onClick={setModalIsOpenToFalse} className="material-symbols-outlined">close</span>
-        <span id={styles.login}>Login</span>
+          <span id={styles.header}>About This Space</span>
         </div>
-        <LoginForm setParentIsOpen={setParentIsOpen}/>
+        {description}
       </Modal>
     </>
   )
 };
 
-export default LoginFormModal;
+export default DescriptionModal;

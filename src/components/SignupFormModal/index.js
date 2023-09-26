@@ -38,7 +38,7 @@ const SignupFormModal = ({ setParentIsOpen }) => {
         ariaHideApp={false}
       >
         <div id={styles.formHeader}>
-        <span onClick={setModalIsOpenToFalse} class="material-symbols-outlined">close</span>
+          <span onClick={setModalIsOpenToFalse} className="material-symbols-outlined">close</span>
         <span id={styles.signUp}>Sign up</span>
         </div>
         <SignupForm setParentIsOpen={setParentIsOpen} />

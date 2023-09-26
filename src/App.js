@@ -1,16 +1,19 @@
 import React, { useState, useEffect,useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
 import Navigation from "./components/Navigation";
+import HomePage from "./components/HomePage";
+import HauntPage from "./components/HauntPage";
 import * as sessionActions from "./store/session";
+import * as hauntActions from "./store/haunts";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser()).then(() => dispatch(hauntActions.getAllHaunts())).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
@@ -19,7 +22,10 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
-            <h1> Home Page under construction </h1>
+            <HomePage />
+          </Route>
+          <Route path='/:hauntId'>
+            <HauntPage />
           </Route>
           <Route>
             <PageNotFound />
