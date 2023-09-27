@@ -43,13 +43,16 @@
     'first fourth fifth'
   ;
   margin: 20px auto;
+  width: 100%;
+  /* box-sizing: border-box; */
 }
 
 #first {
   grid-area: first;
-  width: 591px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
+  background-size: cover; 
+  min-width: 500px;
 }
 
 #second {
@@ -74,21 +77,28 @@
 #third,
 #fourth,
 #fifth {
-  width: 95%;
-  max-height: 193px;
-  min-height: 193px;
-  min-width: 260px;
-  max-width: 260px;
+  height: 280px;
+  min-width: 277px;
 }
 
 .images {
-  padding: 4px;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center; 
+  margin: 5px;
+  min-width: 240px;
+
 }
 
 #hauntInfo {
   display: flex;
   flex-direction: column;
   width: 60%;
+}
+
+#hostedBy{
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 3px 0;
 }
 
 #hauntDescription{
@@ -106,6 +116,10 @@
   display: -webkit-box;
   -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
+}
+
+#dateContainer{
+  width: 60%;
 }
 
 #reviewContainer{

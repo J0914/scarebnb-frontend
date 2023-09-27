@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import styles from './HauntPage.module.css'
 import { images } from '../../mockimages/images'
 import DescriptionModal from './DescriptionModal';
+import CalendarView from './Calendar';
 import Review from './Review';
 
 const HauntPage = () => {
@@ -17,7 +18,7 @@ const HauntPage = () => {
     setHaunt(selectedHaunt);
   }, [selectedHaunt])
 
-  
+
 
   return (
     <div id={styles.pageWrapper}>
@@ -34,25 +35,28 @@ const HauntPage = () => {
           </div>
         </header>
         <div id={styles.imagesContainer}>
-          <img className={styles.images} id={styles.first} src={haunt.Images[0].url} ref={imageRef} />
-          <img className={styles.images} id={styles.second} src={haunt.Images[1].url} ref={imageRef} />
-          <img className={styles.images} id={styles.third} src={haunt.Images[2].url} ref={imageRef} />
-          <img className={styles.images} id={styles.fourth} src={haunt.Images[3].url} ref={imageRef} />
-          <img className={styles.images} id={styles.fifth} src={haunt.Images[4].url} ref={imageRef} />
+          <div className={styles.images} id={styles.first} style={{backgroundImage: `url(${haunt.Images[0].url})`}}></div> 
+          <div className={styles.images} id={styles.second} style={{backgroundImage: `url(${haunt.Images[1].url})`}}></div> 
+          <div className={styles.images} id={styles.third} style={{backgroundImage: `url(${haunt.Images[2].url})`}}></div> 
+          <div className={styles.images} id={styles.fourth} style={{backgroundImage: `url(${haunt.Images[3].url})`}}></div> 
+          <div className={styles.images} id={styles.fifth} style={{backgroundImage: `url(${haunt.Images[4].url})`}}></div> 
         </div>
         <div id={styles.hauntInfo}>
-          <span>Entire haunt hosted by {haunt.User.first_name}</span>
-          <span>{haunt.max_guests} guests • {haunt.bedrooms} bedroom(s) • {haunt.beds} beds • {haunt.bathrooms} bathroom(s) </span>
+          <span id={styles.hostedBy}>Entire haunt hosted by {haunt.User.first_name}</span>
+          <span>{haunt.max_guests} {haunt.max_guests > 1 ? 'guests' : 'guest'} • {haunt.bedrooms} {haunt.bedrooms > 1 ? 'bedrooms' : 'bedroom'} • {haunt.beds} {haunt.beds > 1 ? 'beds' : 'bed'} • {haunt.bathrooms} {haunt.bathrooms > 1 ? 'baths' : 'bath'} </span>
           <div id={styles.hauntDescription}>
             <p id={styles.description}>{haunt.description}</p>
-            <DescriptionModal description={haunt.description}/>
+            <DescriptionModal description={haunt.description} />
           </div>
+        </div>
+        <div id={styles.dateContainer}>
+          <CalendarView />
         </div>
         <div id={styles.reviewContainer}>
           {/* <span>{haunt.Reviews.length} reviews</span> */}
-        {haunt.Reviews.slice(0, 5).map(review => (
-          <Review key={review.id} review={review} />
-        ))}
+          {haunt.Reviews.slice(0, 5).map(review => (
+            <Review key={review.id} review={review} />
+          ))}
         </div>
       </div>
     </div>

@@ -1,0 +1,7 @@
+.calendar {
+  font-size: .9rem;
+  width: 70%;
+  margin: auto;
+  z-index: 0;
+  box-shadow: none;
+}
