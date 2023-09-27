@@ -7,12 +7,16 @@ import DescriptionModal from './DescriptionModal';
 import CalendarView from './Calendar';
 import Review from './Review';
 
-const HauntPage = () => {
+const HauntPage = ({setIsHosting}) => {
   const { hauntId } = useParams();
   const selectedHaunt = useSelector(state => state.haunts.allHaunts[hauntId])
   const [haunt, setHaunt] = useState(selectedHaunt)
   const imageRef = useRef();
   haunt.Images = images;
+
+  useEffect(() => {
+
+  }, setIsHosting(false))
 
   useEffect(() => {
     setHaunt(selectedHaunt);

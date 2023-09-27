@@ -18,7 +18,10 @@ function Navigation({ isLoaded }) {
       <input id={styles.searchBar} type='search' placeholder='Search For A Haunt'  />
         <span id={styles.searchButton} className="material-symbols-outlined">search</span>
       </div>
+      <div>
+      <NavLink to='/host'>Host a Haunt</NavLink>
       <ProfileButton isLoaded={isLoaded} user={sessionUser} />
+      </div>
     </nav>
   );
 }

@@ -29,7 +29,7 @@ const Slideshow = ({ haunt }) => {
 
   return (
     <div className={styles.slideshowContainer}>
-      <NavLink to={`/${haunt.id}`}>
+      <NavLink to={`/haunts/${haunt.id}`}>
         <img className={styles.coverImage} src={coverImage} ref={imageRef} />
       </NavLink>
       <span id={styles.leftButton} onClick={clickLeft} className="material-symbols-outlined">arrow_back_ios</span>

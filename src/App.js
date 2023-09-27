@@ -5,12 +5,14 @@ import PageNotFound from "./components/PageNotFound";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import HauntPage from "./components/HauntPage";
+import CreateHauntPage from "./components/CreateHauntPage";
 import * as sessionActions from "./store/session";
 import * as hauntActions from "./store/haunts";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isHosting, setIsHosting] = useState(false);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => dispatch(hauntActions.getAllHaunts())).then(() => setIsLoaded(true));
@@ -18,14 +20,17 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {!isHosting && <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
-            <HomePage />
+            <HomePage setIsHosting={setIsHosting}/>
           </Route>
-          <Route path='/:hauntId'>
-            <HauntPage />
+          <Route path='/haunts/:hauntId'>
+            <HauntPage setIsHosting={setIsHosting} />
+          </Route>
+          <Route path='/host'>
+            <CreateHauntPage setIsHosting={setIsHosting} />
           </Route>
           <Route>
             <PageNotFound />

@@ -6,9 +6,13 @@ import styles from './HomePage.module.css'
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 
-const HomePage = () => {
+const HomePage = ({setIsHosting}) => {
   const allHaunts = useSelector(state => state.haunts.allHaunts)
   const [haunts, setHaunts] = useState([])
+
+  useEffect(() => {
+    setIsHosting(false);
+  },[])
 
   useEffect(() => {
     const hauntsArray = Object.values(allHaunts)
