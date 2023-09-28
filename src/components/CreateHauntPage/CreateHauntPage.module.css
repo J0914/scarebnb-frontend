@@ -1,0 +1,25 @@
+#nav{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.logo{
+  width: 50px;
+}
+
+.cancelandexit{
+  text-decoration: none;
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: bold;
+  color: black;
+  font-size: .8rem;
+}
+
+.logo, .cancelandexit{
+  margin: 0 20px;
+}

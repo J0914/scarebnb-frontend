@@ -20,7 +20,9 @@ const CreateHauntPage = ({setIsHosting}) => {
   const [bathrooms, setBathrooms] = useState(1);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(50);
+  const [price, setPrice] = useState(0);
+
+  console.log(state);
 
   useEffect(() => {
     setIsHosting(true);
@@ -28,9 +30,9 @@ const CreateHauntPage = ({setIsHosting}) => {
 
   return (
     <>
-      <nav>
+      <nav id={styles.nav}>
       <NavLink to='/'><img className={styles.logo} src='https://i.ibb.co/QCqyySJ/logo.png' /></NavLink>
-      <NavLink to='/'>Cancel</NavLink>
+      <NavLink className={styles.cancelandexit} to='/'>Cancel & exit</NavLink>
       </nav>
       <Switch>
         <Route exact path='/host'>
@@ -85,6 +87,8 @@ const CreateHauntPage = ({setIsHosting}) => {
             beds={beds}
             bedrooms={bedrooms}
             bathrooms={bathrooms}
+            price={price}
+            setPrice={setPrice}
           />
         </Route>
       </Switch>

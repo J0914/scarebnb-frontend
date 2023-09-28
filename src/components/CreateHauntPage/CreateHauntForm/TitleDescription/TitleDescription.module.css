@@ -1,0 +1,83 @@
+#titleDescriptionContainer {
+  display: grid;
+  grid-template-rows: 1fr 80px;
+  grid-template-areas:
+    'form'
+    'footer';
+  height: 90vh;
+}
+
+#tAndDWrapper {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#formWrapper{
+  position: relative;
+  width: 50%;
+}
+
+#formWrapper>div{
+  display: flex;
+  flex-direction: column;
+}
+
+#formWrapper>div:first-child{
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 3px; 
+}
+
+#input{
+  width: 50%;
+  border-radius: 10px; 
+}
+
+#textarea{
+  width: 90%;
+  resize: none;
+  height: 40vh;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#input, #textarea{
+
+}
+
+#formHeader{
+  margin: 30px;
+  margin-left: 0;
+}
+
+#formHeader>h1{
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#footer {
+  grid-area: footer;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 7px solid rgb(221, 221, 221);
+}
+
+.navlink {
+  text-decoration: none;
+  background: orangered;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: .9rem;
+  text-align: center;
+  padding: 15px 30px;
+  margin: 15px 20px;
+}
+
+.navlink:hover {
+  background: rgba(255, 68, 0, 0.658)
+}

@@ -21,6 +21,10 @@ const FinishSetup = ({title, description, street, city, state, zip_code, max_gue
       price
     }
 
+    if (price === 0){
+      //warn that they didn't set a price
+    }
+
     window.alert(newHaunt)
   }
 
