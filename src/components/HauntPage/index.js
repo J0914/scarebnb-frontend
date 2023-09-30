@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styles from './HauntPage.module.css'
-import { images } from '../../mockimages/images'
 import DescriptionModal from './DescriptionModal';
 import CalendarView from './Calendar';
 import Review from './Review';
@@ -11,8 +10,6 @@ const HauntPage = ({setIsHosting}) => {
   const { hauntId } = useParams();
   const selectedHaunt = useSelector(state => state.haunts.allHaunts[hauntId])
   const [haunt, setHaunt] = useState(selectedHaunt)
-  const imageRef = useRef();
-  haunt.Images = images;
 
   useEffect(() => {
 

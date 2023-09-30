@@ -7,6 +7,7 @@ const Slideshow = ({ haunt }) => {
   const [imgIdx, setImgIdx] = useState(0);
   const imageRef = useRef();
 
+
   const clickLeft = () => {
     if (imgIdx === 0) {
       setImgIdx(haunt.Images.length - 1);

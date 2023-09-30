@@ -39,4 +39,5 @@
   box-sizing: border-box;
   width: 390px;
   height: 264px;
+  border-radius: 15px;
 }

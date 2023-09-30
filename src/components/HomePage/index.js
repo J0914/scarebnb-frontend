@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { images } from '../../mockimages/images'
 import HauntCard from './HauntCard';
 import styles from './HomePage.module.css'
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";

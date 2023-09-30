@@ -1,8 +1,17 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {states} from './states'
 import styles from './AboutHaunt.module.css'
+import { useEffect } from "react";
 
 const AboutHaunt = ({ street, setStreet, city, setCity, state, setState, zip_code, setZip_code }) => {
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (street && city && state && zip_code){
+      setDisabled(false);
+    }
+  }, [street, city, state, zip_code])
 
   return (
     <div id={styles.aboutContainer}>
@@ -43,7 +52,7 @@ const AboutHaunt = ({ street, setStreet, city, setCity, state, setState, zip_cod
         <h2>todo: add google map</h2>
       </div>
       <footer id={styles.footer}>
-        <NavLink className={styles.navlink} to='/host/floor-plan'>Next</NavLink>
+        {!disabled && <NavLink className={styles.navlink} to='/host/floor-plan'>Next</NavLink>}
       </footer>
     </div>
   )

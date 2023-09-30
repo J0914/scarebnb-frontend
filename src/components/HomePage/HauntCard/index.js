@@ -1,10 +1,8 @@
 import styles from './HauntCard.module.css'
-import { images } from '../../../mockimages/images';
-import { useState } from 'react';
+
 import Slideshow from './Slideshow';
 
 const HauntCard = ({haunt}) => {
-  haunt.Images = images;
 
   return(
     <div className={styles.hauntCard_container}>

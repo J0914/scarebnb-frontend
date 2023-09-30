@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Intro from './CreateHauntForm/Intro';
 import AboutHaunt from './CreateHauntForm/AboutHaunt';
 import FloorPlan from './CreateHauntForm/FloorPlan';
-import StandOut from './CreateHauntForm/StandOut';
+import AddImages from './CreateHauntForm/AddImages';
 import TitleDescription from './CreateHauntForm/TitleDescription';
 import FinishSetup from './CreateHauntForm/FinishSetup';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
@@ -21,6 +21,7 @@ const CreateHauntPage = ({setIsHosting}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
+  const [images, setImages] = useState([])
 
   console.log(state);
 
@@ -63,7 +64,10 @@ const CreateHauntPage = ({setIsHosting}) => {
           />
         </Route>
         <Route path='/host/stand-out'>
-          <StandOut />
+          <AddImages 
+            images={images}
+            setImages={setImages}
+          />
         </Route>
         <Route path='/host/title-description'>
           <TitleDescription
