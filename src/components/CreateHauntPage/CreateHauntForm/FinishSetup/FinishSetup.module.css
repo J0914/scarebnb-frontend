@@ -1,0 +1,116 @@
+#FinishSetupWrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+  'header header'
+  'preview next'
+  'footer footer';
+  height: 90vh;
+  position: relative;
+}
+
+#headerContainer{
+  grid-area: header;
+  margin: auto;
+  margin-bottom: 10px;
+  height: fit-content;
+  width: 60%;
+}
+
+#headerContainer>h1{
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#previewAndPrice{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#previewContainer{
+  margin: 75px;
+  margin-top: 0;
+}
+
+#nextContainer{
+  grid-area: next;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  padding-top: 0;
+}
+
+#nextContainer>h2{
+  font-weight: bold;
+  text-align: center;
+}
+
+#previewAndPrice{
+  grid-area: preview;
+  padding: 20px;
+  padding-top: 0;
+}
+
+#priceContainer{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#priceContainer>label{
+  font-weight: bold;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.priceInput{
+  width: 50px;
+  border: 3px solid black; 
+  font-weight: 600;
+}
+
+
+.listItem{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  padding-bottom: 30px;
+}
+
+.listItem>h3{
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+
+#footer{
+  position: absolute;
+  bottom: 0;
+  grid-area: footer;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 7px solid rgb(221, 221, 221);
+}
+
+.navlink{
+  text-decoration: none;
+  background: orangered;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  font-size: .9rem;
+  text-align: center;
+  padding: 15px 30px ;
+  margin: 15px 20px;
+  border: none;
+}
+
+.navlink:hover{
+ background: rgba(255, 68, 0, 0.658) 
+}

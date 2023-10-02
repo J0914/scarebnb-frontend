@@ -1,8 +1,21 @@
 import { NavLink } from "react-router-dom";
 import styles from './TitleDescription.module.css'
+import { useEffect, useState } from "react";
 
 const TitleDescription = ({ title, setTitle, description, setDescription, price, setPrice }) => {
 
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (title.length > 0 && title.length <= 50 && description.length > 0 && description.length <= 5000) setDisabled(false)
+    else setDisabled(true)
+  }, [title, description])
+
+  const addToLocal = () => {
+    localStorage.setItem('title', title);
+    localStorage.setItem('description', description);
+  }
+  
   return (
     <div id={styles.titleDescriptionContainer}>
       <div id={styles.tAndDWrapper}>
@@ -34,7 +47,7 @@ const TitleDescription = ({ title, setTitle, description, setDescription, price,
       </div>
       <footer id={styles.footer}>
         <NavLink className={styles.navlink} to='/host/stand-out'>Back</NavLink>
-        {title.length === 0 || description.length === 0 ? <span>Add title and description to continue</span> : <NavLink className={styles.navlink} to='/host/finish-setup'>Next</NavLink>}
+        {!disabled && <NavLink onClick={addToLocal} className={styles.navlink} to='/host/finish-setup'>Next</NavLink>}
       </footer>
     </div>
   )

@@ -27,6 +27,10 @@
   margin-bottom: 5px;
 }
 
+#formHeader>:last-child{
+  font-size: .8rem;
+}
+
 #form{
   display: flex;
   flex-direction: column;
@@ -35,27 +39,22 @@
   width: 100%;
 }
 
-#preview{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#noPreview{
+#previewContainer{
+  width: 60vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#previewContainer{
-  width: 80vw;
-  height: 55vh;
-  overflow: auto;
-  margin: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+#previewContainer>input:first-child{
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+#previewContainer>input:last-child{
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .fileButton{

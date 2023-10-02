@@ -1,0 +1,41 @@
+#previewHeader{
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.previewButton{
+  background: orangered;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  margin: 10px;
+}
+
+#header{
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+#titleContainer{
+  margin: 5px 30px;
+}
+
+#slideshowContainer{
+  margin: 0 auto;
+  width: fit-content;
+}
+
+#info{
+  display: flex;
+  flex-direction: column;
+  margin: 5px 30px;
+}
+
+#description{
+  overflow: auto;
+  height: 300px;
+  margin: 5px 30px;
+}

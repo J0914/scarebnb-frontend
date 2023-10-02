@@ -2,65 +2,43 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from './AddImages.module.css';
 
-const AddImages = ({ setImages }) => {
-  const [preview, setPreview] = useState([])
+const AddImages = ({ images, setImages }) => {
+  const [url1, setUrl1] = useState('https://i.ibb.co/RT2hLzH/house2.jpg');
+  const [url2, setUrl2] = useState('https://i.ibb.co/k8y1JCc/interior19.jpg');
+  const [url3, setUrl3] = useState('https://i.ibb.co/Ctq7WgV/interior16.jpg');
+  const [url4, setUrl4] = useState('https://i.ibb.co/Kx4H7Rm/interior13.jpg');
+  const [url5, setUrl5] = useState('https://i.ibb.co/fNWVPC0/interior5.jpg');
   const [disabled, setDisabled] = useState(true);
 
-  const updateFiles = (e) => {
-    const files = e.target.files;
-    setImages(files);
-    const prev = [];
-    for (let i = 0; i < files.length; i++) {
-      prev.push(URL.createObjectURL(files[i]))
-    }
-    setPreview(prev)
-  };
-
   useEffect(() => {
-    if (preview.length > 4) {
-      setDisabled(false)
+    if (url1 && url2 && url3 && url4 && url5){
+      const newImages = [url1, url2, url3, url4, url5]
+      setImages(newImages)
     }
-  }, [preview])
 
-
+    if (images.length === 5){
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+  }, [url1, url2, url3, url4, url5])
 
   return (
     <div id={styles.imagesContainer}>
       <div id={styles.formWrapper}>
         <header id={styles.formHeader}>
           <h1>Add some photos of your haunt</h1>
-          <span>You'll need at least 5 photos to get started (jpg or png)</span>
+          <span>You'll need 5 photos to get started.</span>
+          <span>(Aws Integration coming soon! If you don't have your own image urls feel free to use these!)</span>
         </header>
         <div id={styles.form}>
           <div id={styles.previewContainer}>
-            {preview.length > 0 ?
-                <div id={styles.preview}>
-              {preview.map((url, i) => (
-                <img 
-                  key={i}
-                  style={{ width: '300px', margin: '5px' }} 
-                  src={url} 
-                  alt='preview image' 
-                  />
-                ))}
-              </div>
-              :
-              <div id={styles.noPreview}>
-                <img src="https://i.ibb.co/KbjzgWp/hearts.png" />
-                Make sure you choose your desired cover photo first.
-              </div>
-            }
+            <input type="text" placeholder="Image Url 1" value={url1} onChange={(e) => setUrl1(e.target.value)}/>
+            <input type="text" placeholder="Image Url 2" value={url2} onChange={(e) => setUrl2(e.target.value)} />
+            <input type="text" placeholder="Image Url 3" value={url3} onChange={(e) => setUrl3(e.target.value)} />
+            <input type="text" placeholder="Image Url 4" value={url4} onChange={(e) => setUrl4(e.target.value)} />
+            <input type="text" placeholder="Image Url 5" value={url5} onChange={(e) => setUrl5(e.target.value)} />
           </div>
-          {/* {preview && <img src={preview} />} */}
-          {<label className={styles.fileButton} htmlFor="upload">{preview.length > 0 ? 'Re-select Images' : 'Select Images'}</label>}
-          <input
-            id='upload'
-            type="file"
-            name="images"
-            multiple
-            accept=".png, .jpg"
-            onChange={updateFiles}
-          ></input>
         </div>
       </div>
       <footer id={styles.footer}>

@@ -6,7 +6,9 @@ const HauntCard = ({haunt}) => {
 
   return(
     <div className={styles.hauntCard_container}>
-      <Slideshow haunt={haunt}/>
+      <Slideshow 
+      isPreview={false}
+      images={haunt.Images}/>
       <span className={styles.location}>{haunt.city}, {haunt.state}</span>
       <span className={styles.price}>${haunt.price} night</span>
     </div>

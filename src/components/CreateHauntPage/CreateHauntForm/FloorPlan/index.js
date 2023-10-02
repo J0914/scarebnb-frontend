@@ -15,6 +15,13 @@ const FloorPlan = ({ max_guests, setMax_guests, bedrooms, setBedrooms, beds, set
     setInput(prevNum => prevNum - 1)
   }
 
+  const addToLocal = () => {
+    localStorage.setItem('max_guests', max_guests);
+    localStorage.setItem('bedrooms', bedrooms);
+    localStorage.setItem('beds', beds);
+    localStorage.setItem('bathrooms', bathrooms);
+  }
+
   return (
     <div id={styles.floorPlanContainer}>
       <div id={styles.formWrapper}>
@@ -88,7 +95,7 @@ const FloorPlan = ({ max_guests, setMax_guests, bedrooms, setBedrooms, beds, set
       </div>
       <footer id={styles.footer}>
         <NavLink className={styles.navlink} to='/host/about-your-haunt'>Back</NavLink>
-        <NavLink className={styles.navlink} to='/host/stand-out'>Next</NavLink>
+        <NavLink onClick={addToLocal} className={styles.navlink} to='/host/stand-out'>Next</NavLink>
       </footer>
     </div>
   )

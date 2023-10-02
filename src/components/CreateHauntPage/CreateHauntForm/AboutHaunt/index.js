@@ -13,6 +13,13 @@ const AboutHaunt = ({ street, setStreet, city, setCity, state, setState, zip_cod
     }
   }, [street, city, state, zip_code])
 
+  const addToLocal = () => {
+    localStorage.setItem('street', street);
+    localStorage.setItem('city', city);
+    localStorage.setItem('state', state);
+    localStorage.setItem('zip_code', zip_code);
+  }
+
   return (
     <div id={styles.aboutContainer}>
       <div id={styles.formWrapper}>
@@ -52,7 +59,7 @@ const AboutHaunt = ({ street, setStreet, city, setCity, state, setState, zip_cod
         <h2>todo: add google map</h2>
       </div>
       <footer id={styles.footer}>
-        {!disabled && <NavLink className={styles.navlink} to='/host/floor-plan'>Next</NavLink>}
+        {!disabled && <NavLink onClick={addToLocal} className={styles.navlink} to='/host/floor-plan'>Next</NavLink>}
       </footer>
     </div>
   )

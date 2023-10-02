@@ -10,20 +10,19 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from './CreateHauntPage.module.css'
 
 const CreateHauntPage = ({setIsHosting}) => {
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip_code, setZip_code] = useState('');
-  const [max_guests, setMax_guests] = useState(1);
-  const [bedrooms, setBedrooms] = useState(1);
-  const [beds, setBeds] = useState(1);
-  const [bathrooms, setBathrooms] = useState(1);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
-  const [images, setImages] = useState([])
+  const [street, setStreet] = useState(localStorage.getItem('street') || '');
+  const [city, setCity] = useState(localStorage.getItem('city') || '');
+  const [state, setState] = useState(localStorage.getItem('state') || '');
+  const [zip_code, setZip_code] = useState(localStorage.getItem('zip_code') || '');
+  const [max_guests, setMax_guests] = useState(localStorage.getItem('max_guests') || 1);
+  const [bedrooms, setBedrooms] = useState(localStorage.getItem('bedrooms') || 1);
+  const [beds, setBeds] = useState(localStorage.getItem('beds') || 1);
+  const [bathrooms, setBathrooms] = useState(localStorage.getItem('bathrooms') || 1);
+  const [title, setTitle] = useState(localStorage.getItem('title') || '');
+  const [description, setDescription] = useState(localStorage.getItem('description') || '');
+  const [price, setPrice] = useState(localStorage.getItem('price') || 0);
+  const [images, setImages] = useState(localStorage.getItem('images') || null)
 
-  console.log(state);
 
   useEffect(() => {
     setIsHosting(true);
@@ -91,6 +90,7 @@ const CreateHauntPage = ({setIsHosting}) => {
             beds={beds}
             bedrooms={bedrooms}
             bathrooms={bathrooms}
+            images={images}
             price={price}
             setPrice={setPrice}
           />
