@@ -89,10 +89,27 @@
 
 }
 
+#midContainer{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+  'left right';
+}
+
+#leftMid{
+  grid-area: left;
+  width: 90%;
+  padding-right: 30px;
+}
+
+#rightMid{
+  grid-area: right;
+  
+}
+
 #hauntInfo {
   display: flex;
   flex-direction: column;
-  width: 60%;
 }
 
 #hostedBy{
@@ -116,10 +133,6 @@
   display: -webkit-box;
   -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
-}
-
-#dateContainer{
-  width: 60%;
 }
 
 #reviewContainer{

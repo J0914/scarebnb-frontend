@@ -21,8 +21,6 @@ const FinishSetup = ({ title, description, street, city, state, zip_code, max_gu
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-    console.log(images)
-
     const newHaunt = {
       title,
       description,
@@ -40,7 +38,18 @@ const FinishSetup = ({ title, description, street, city, state, zip_code, max_gu
 
     await dispatch(createHaunt(newHaunt))
     .then((haunt) => {
-      localStorage.clear();
+      localStorage.removeItem('street')
+      localStorage.removeItem('city')
+      localStorage.removeItem('state')
+      localStorage.removeItem('zip_code')
+      localStorage.removeItem('max_guests')
+      localStorage.removeItem('bedrooms')
+      localStorage.removeItem('beds')
+      localStorage.removeItem('bathrooms')
+      localStorage.removeItem('title')
+      localStorage.removeItem('description')
+      localStorage.removeItem('price')
+      localStorage.removeItem('images')
       history.push(`/haunts/${haunt.id}`)
     });
   }

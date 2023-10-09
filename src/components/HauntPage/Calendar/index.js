@@ -1,23 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { Calendar, utils } from 'react-modern-calendar-datepicker';
 import styles from './Calendar.module.css'
 
 
-const CalendarView = () => {
-  const [selectedDayRange, setSelectedDayRange] = useState({
-    from: null,
-    to: null
-  })
+const CalendarView = ({selectedDayRange, setSelectedDayRange}) => {
 
-  console.log(selectedDayRange)
-
-  if (selectedDayRange.from){
-    const {from: {month, day, year}} = selectedDayRange;
-    const date = new Date(`${month}-${day}-${year}`)
-    console.log(date)
-  }
-
+  useEffect(() => {
+    if (selectedDayRange.from === null) localStorage.removeItem('selectedDayRange')
+    else {
+      if (selectedDayRange.from !== null && selectedDayRange.to !== null){
+        const range = JSON.stringify(selectedDayRange)
+        localStorage.setItem('selectedDayRange', range)
+      }
+    }
+  }, [selectedDayRange])
+  
   // const disabledDays = [
   //   {
   //     year: 2019,
