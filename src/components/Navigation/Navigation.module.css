@@ -104,3 +104,19 @@
 #menuButton{
   font-size: 20px;
 }
+
+#dropdownContainer{
+  display: flex;
+  align-items: center;
+}
+
+#hostLink{
+  text-wrap: nowrap;
+  margin-right: 20px;
+  text-decoration: none;
+  color: orangered;
+}
+
+#hostLink:hover{
+  text-decoration: underline;
+}

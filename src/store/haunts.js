@@ -28,27 +28,19 @@ export const createHaunt = (haunt) => async dispatch => {
   })
   
   if (hauntRes.ok){
-    const newHaunt = hauntRes.json();
-    const imagesRes = await csrfFetch(`/api/images/multiple/${newHaunt.id}`, {
-      method: 'POST',
-      body: JSON.stringify(haunt.images)
-    });
-
-    if (imagesRes.ok){
-      const finalHaunt = imagesRes.json();
-      dispatch(addSingleHaunt(finalHaunt))
-    }
+    const newHaunt = await hauntRes.json();
+    dispatch(addSingleHaunt(newHaunt))
+    return newHaunt;
   }
-
 };
 
 
-const hauntReducer = (state = {allHaunts: {}}, action) => {
+const hauntReducer = (state = {}, action) => {
   switch (action.type){
     case ADDHAUNTS:{
       const newState = {...state}
       action.haunts.forEach(haunt => {
-        newState.allHaunts[haunt.id] = haunt;
+        newState[haunt.id] = haunt;
       });
       return newState;
     }

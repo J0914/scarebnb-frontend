@@ -5,7 +5,6 @@ import Slideshow from '../../../../HomePage/HauntCard/Slideshow'
 
 
 const Preview = ({ title, description, city, state, max_guests, bedrooms, beds, bathrooms, images }) => {
-  const [preview, setPreview] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const setModalIsOpenToTrue = () => {
@@ -15,16 +14,6 @@ const Preview = ({ title, description, city, state, max_guests, bedrooms, beds, 
   const setModalIsOpenToFalse = () => {
     setModalIsOpen(false)
   }
-
-  useEffect(() => {
-    if (images) {
-      const prev = [];
-      for (let i = 0; i < images.length; i++) {
-        prev.push({ url: URL.createObjectURL(images[i]) })
-      }
-      setPreview(prev)
-    }
-  }, [images])
 
   const customStyles = {
     content: {
@@ -60,7 +49,7 @@ const Preview = ({ title, description, city, state, max_guests, bedrooms, beds, 
         <div id={styles.slideshowContainer}>
           {images ? <Slideshow
             isPreview={true}
-            images={preview} />
+            images={images} />
             :
             'Sorry, please re-select images :('}
         </div>

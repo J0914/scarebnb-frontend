@@ -8,7 +8,7 @@ import Review from './Review';
 
 const HauntPage = ({setIsHosting}) => {
   const { hauntId } = useParams();
-  const selectedHaunt = useSelector(state => state.haunts.allHaunts[hauntId])
+  const selectedHaunt = useSelector(state => state.haunts[hauntId])
   const [haunt, setHaunt] = useState(selectedHaunt)
 
   useEffect(() => {

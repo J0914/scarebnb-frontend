@@ -6,13 +6,13 @@ const FloorPlan = ({ max_guests, setMax_guests, bedrooms, setBedrooms, beds, set
 
   const increase = (e, setInput) => {
     e.preventDefault();
-    setInput(prevNum => prevNum + 1)
+    setInput(prevNum => ++prevNum)
   }
 
   const decrease = (e, input, setInput) => {
     e.preventDefault();
     if (input <= 1) return;
-    setInput(prevNum => prevNum - 1)
+    setInput(prevNum => --prevNum)
   }
 
   const addToLocal = () => {

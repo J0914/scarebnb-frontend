@@ -21,6 +21,8 @@ const FinishSetup = ({ title, description, street, city, state, zip_code, max_gu
   const handleSubmit = async(e) => {
     e.preventDefault();
 
+    console.log(images)
+
     const newHaunt = {
       title,
       description,
@@ -40,13 +42,6 @@ const FinishSetup = ({ title, description, street, city, state, zip_code, max_gu
     .then((haunt) => {
       localStorage.clear();
       history.push(`/haunts/${haunt.id}`)
-    })
-    .catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) {
-        const newErrors = data.errors;
-        setErrors(newErrors);
-      }
     });
   }
 

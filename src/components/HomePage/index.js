@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const HomePage = ({setIsHosting}) => {
-  const allHaunts = useSelector(state => state.haunts.allHaunts)
+  const allHaunts = useSelector(state => state.haunts)
   const [haunts, setHaunts] = useState([])
 
   useEffect(() => {

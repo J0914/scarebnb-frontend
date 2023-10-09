@@ -5,10 +5,6 @@ import styles from './Slideshow.module.css'
 const Slideshow = ({ images, isPreview }) => {
   const [coverImage, setCoverImage] = useState(images[0].url)
   const [imgIdx, setImgIdx] = useState(0);
-  const imageRef = useRef();
-
-  console.log('coverImage', coverImage)
-
 
   const clickLeft = () => {
     if (imgIdx === 0) {
@@ -33,10 +29,10 @@ const Slideshow = ({ images, isPreview }) => {
   return (
     <div className={styles.slideshowContainer}>
       {!isPreview ? <NavLink to={`/haunts/${images[0].hauntId}`}>
-        <img className={styles.coverImage} src={coverImage} ref={imageRef} />
+        <img className={styles.coverImage} src={coverImage} />
       </NavLink>
         :
-        <img className={styles.coverImage} src={coverImage} ref={imageRef} />
+        <img className={styles.coverImage} src={coverImage} />
       }
       <span id={styles.leftButton} onClick={clickLeft} className="material-symbols-outlined">arrow_back_ios</span>
       <span id={styles.rightButton} onClick={clickRight} className="material-symbols-outlined">arrow_forward_ios</span>
