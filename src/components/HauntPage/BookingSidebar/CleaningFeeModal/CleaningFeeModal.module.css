@@ -1,0 +1,7 @@
+#content{
+  display: flex;
+}
+
+#content>:first-child{
+  margin-right: 10px;
+}

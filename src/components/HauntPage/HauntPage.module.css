@@ -140,4 +140,5 @@
   flex-wrap: wrap;
   padding: 15px;
   margin: 0 10px;
+  border-top: 1px solid rgb(223, 223, 223);
 }

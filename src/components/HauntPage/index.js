@@ -62,7 +62,7 @@ const HauntPage = ({ setIsHosting }) => {
             </div>
           </div>
           <div id={styles.rightMid}>
-            <BookingSidebar />
+            <BookingSidebar range={selectedDayRange} haunt={haunt} />
           </div>
         </div>
         <div id={styles.reviewContainer}>

@@ -1,0 +1,31 @@
+#modalHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(223, 223, 223);
+  margin-bottom: 10px;
+}
+
+#modalHeader>:last-child{
+  width: 100%;
+  text-align: center;
+}
+
+#breakdownContainer{
+  padding: 10px;
+}
+
+#breakdownContainer>div{
+  margin: 10px 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#breakdownFooter{
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgb(223, 223, 223);
+  padding-top: 15px;
+  margin-top: 10px;
+}
