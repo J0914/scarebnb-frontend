@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 import PriceBreakdownModal from "./PriceBreakdownModal";
 import CleaningFeeModal from "./CleaningFeeModal";
 import ServiceFeeModal from "./ServiceFeeModal";
@@ -6,26 +7,27 @@ import styles from './BookingSidebar.module.css'
 
 
 const BookingSidebar = ({ range, haunt }) => {
-  const [start, setStart] = useState('')
-  const [end, setEnd] = useState('')
-  const [guests, setGuests] = useState(1);
+  const [check_in, setCheck_in] = useState('')
+  const [check_out, setCheck_out] = useState('')
+  const [num_guests, setNum_guests] = useState(1);
   const [nights, setNights] = useState(0)
   const [stayPrice, setStayPrice] = useState(0)
   const [cleaningFee, setCleaningFee] = useState(0);
   const [scarebnbFee, setScarebnbFee] = useState(0);
   const [total, setTotal] = useState(0);
   const [showPriceBreakdown, setShowPriceBreakdown] = useState('none')
+  const sessionUser = useSelector(state => state.session.user)
 
   useEffect(() => {
     if (range.from) {
-      setStart(`${range.from.month}/${range.from.day}/${range.from.year}`)
+      setCheck_in(`${range.from.month}/${range.from.day}/${range.from.year}`)
     } else {
-      setStart('');
+      setCheck_in('');
     }
     if (range.to) {
-      setEnd(`${range.to.month}/${range.to.day}/${range.to.year}`)
+      setCheck_out(`${range.to.month}/${range.to.day}/${range.to.year}`)
     } else {
-      setEnd('')
+      setCheck_out('')
     }
 
     if (range.from && range.to) {
@@ -48,7 +50,7 @@ const BookingSidebar = ({ range, haunt }) => {
 
   const increase = (e, setInput) => {
     e.preventDefault();
-    if (guests === haunt.max_guests) return;
+    if (num_guests === haunt.max_guests) return;
     setInput(prevNum => ++prevNum)
   }
 
@@ -56,6 +58,21 @@ const BookingSidebar = ({ range, haunt }) => {
     e.preventDefault();
     if (input <= 1) return;
     setInput(prevNum => --prevNum)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!sessionUser) window.alert('Please login to book this haunt!')
+    else {
+      const booking = {
+        check_in,
+        check_out,
+        num_guests
+      }
+
+
+    }
   }
 
   return (
@@ -72,13 +89,14 @@ const BookingSidebar = ({ range, haunt }) => {
           <div id={styles.bookingInputContainer}>
             <input 
             placeholder="Choose check-in date" 
-            type="text" value={start} 
+            type="text" 
+            value={check_in} 
             readOnly 
             />
             <input 
             placeholder="Choose checkout date" 
             type="text" 
-            value={end} 
+            value={check_out} 
             readOnly 
             />
           </div>
@@ -87,22 +105,22 @@ const BookingSidebar = ({ range, haunt }) => {
               <label htmlFor='guests'>Guests</label>
             </div>
             <div id={styles.guestsInput}>
-              <button onClick={(e) => decrease(e, guests, setGuests)} className={`material-symbols-outlined`}>remove</button>
+              <button onClick={(e) => decrease(e, num_guests, setNum_guests)} className={`material-symbols-outlined`}>remove</button>
               <input
                 id='guests'
                 type='number'
-                value={guests}
+                value={num_guests}
                 max={haunt.max_guests}
                 readOnly
               />
-              <button onClick={(e) => increase(e, setGuests)} className={`material-symbols-outlined`}>add</button>
+              <button onClick={(e) => increase(e, setNum_guests)} className={`material-symbols-outlined`}>add</button>
             </div>
           </div>
         </div>
         <div id={styles.buttonContainer}>
           {range.from && range.to ?
             <div>
-              <button>Reserve</button>
+              <button onClick={handleSubmit}>Reserve</button>
               <span>You won't be charged</span>
             </div>
             :
@@ -136,7 +154,7 @@ const BookingSidebar = ({ range, haunt }) => {
         </div>
       </div>
     </div>
-  )
+   )
 };
 
 export default BookingSidebar;
