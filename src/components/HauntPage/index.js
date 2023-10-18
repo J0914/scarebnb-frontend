@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Redirect } from 'react-router-dom';
 import styles from './HauntPage.module.css'
@@ -15,6 +15,7 @@ const HauntPage = ({ setIsHosting }) => {
   const [selectedDayRange, setSelectedDayRange] = useState(JSON.parse(localStorage.getItem('selectedDayRange')) || { from: null, to: null })
   const [nights, setNights] = useState([])
   const dispatch = useDispatch();
+  const calendarRef = useRef(null)
 
   useEffect(() => {
     setIsHosting(false)
@@ -41,7 +42,9 @@ const HauntPage = ({ setIsHosting }) => {
     } else setNights([])
   }, [selectedDayRange])
 
-  console.log('nights in hauntPage', nights)
+  const handleScrollClick = () => {
+    calendarRef.current?.scrollIntoView({behavior: 'smooth'});
+  }
 
   if (!selectedHaunt) {
     return <Redirect to='/page-not-found' />
@@ -79,12 +82,12 @@ const HauntPage = ({ setIsHosting }) => {
                 <DescriptionModal description={haunt.description} />
               </div>
             </div>
-            <div id={styles.dateContainer}>
+            <div ref={calendarRef} id={styles.dateContainer}>
               <CalendarView nights={nights} selectedDayRange={selectedDayRange} setSelectedDayRange={setSelectedDayRange} />
             </div>
           </div>
           <div id={styles.rightMid}>
-            <BookingSidebar nights={nights} range={selectedDayRange} haunt={haunt} />
+            <BookingSidebar handleScrollClick={handleScrollClick} nights={nights} range={selectedDayRange} haunt={haunt} />
           </div>
         </div>
         <div id={styles.reviewContainer}>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import {NavLink} from 'react-router-dom'
 import * as sessionActions from '../../store/session';
 import LoginFormModal from './LoginFormModal';
 import SignupFormModal from './SignupFormModal';
@@ -27,7 +28,10 @@ const ProfileButton = ({ user, isLoaded }) => {
   let sessionLinks;
   if (user) {
     sessionLinks = (
-      <button className={styles.logoutButton} onClick={handleLogout}>Log Out</button>
+      <>
+        <NavLink onClick={() => setModalIsOpen(false)} id={styles.accountButton} to='/account'>Account</NavLink>
+        <button className={styles.logoutButton} onClick={handleLogout}>Log Out</button>
+      </>
     );
   } else {
     sessionLinks = (

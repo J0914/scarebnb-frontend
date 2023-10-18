@@ -1,0 +1,33 @@
+#navLink{
+  text-decoration: none;
+  color: black;
+  display: inline-flex;
+  width: 30vw;
+}
+
+#BookingView{
+  display: flex;
+  margin: 10px;
+  align-items: center;
+  width: fit-content;
+}
+
+#img{
+  width: 100px;
+  border-radius: 10px;
+}
+
+#details{
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+}
+
+#city{
+  font-weight: bold;
+}
+
+.span{
+  font-size: .9rem;
+  margin: 1px 0;
+}

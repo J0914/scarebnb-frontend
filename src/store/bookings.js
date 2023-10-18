@@ -50,7 +50,7 @@ export const createBooking = (booking) => async dispatch => {
 }
 
 
-const bookingReducer = (state = {haunt: {}, user: {}}, action) => {
+const bookingReducer = (state = {haunt: {}, user: []}, action) => {
   switch (action.type){
     case ADDHAUNTBOOKINGS: {
       const newState = {...state, haunt: {}};
@@ -62,12 +62,8 @@ const bookingReducer = (state = {haunt: {}, user: {}}, action) => {
       return newState;
     }
     case ADDUSERBOOKINGS: {
-      const newState = {...state, user: {}};
-      if (action.bookings.length > 0){
-        action.bookings.forEach(booking => {
-          newState.user[booking.id] = booking;
-        });
-      }
+      const newState = {...state, user: []};
+      newState.user = action.bookings
       return newState;
     }
     case ADDSINGLEBOOKING: {

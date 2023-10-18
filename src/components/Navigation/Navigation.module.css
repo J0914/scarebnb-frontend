@@ -6,6 +6,8 @@
   position: relative;
   height: 80px;
   padding: 0 5%;
+  border-bottom: 1px solid rgb(223, 223, 223);
+  margin-bottom: 30px;
 }
 
 .profileContainer{
@@ -26,6 +28,7 @@
   right: 6%;
   top: 75px;
   border-radius: 10px;
+  padding: 20px 0;
   box-shadow: 2px 1px 5px #e8e8e8;
   outline: none;
   background-color: white;
@@ -37,7 +40,16 @@
   align-items: center;
 }
 
-.logoutButton{
+#accountButton{
+  background-color: white;
+  text-decoration: none;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.logoutButton, #accountButton{
   background-color: white;
   border: none;
   font-weight: bold;
@@ -45,9 +57,10 @@
   height: 40px;
   text-align: left;
   padding-left: 20px;
+  margin-top: 0;
 }
 
-.logoutButton:hover{
+.logoutButton:hover, #accountButton:hover{
   background-color: rgb(240, 240, 240);
   color: orangered;
 }

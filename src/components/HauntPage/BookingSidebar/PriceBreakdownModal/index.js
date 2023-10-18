@@ -34,7 +34,7 @@ const PriceBreakdownModal = ({ price, nights }) => {
 
   return (
     <>
-      <span className={styles.modalOpenSpan} onClick={setModalIsOpenToTrue} >${price} x {nights.length - 1} nights</span>
+      <span className={styles.modalOpenSpan} onClick={setModalIsOpenToTrue} >${price} x {nights.length - 1 || 1} nights</span>
       <Modal
         isOpen={modalIsOpen}
         style={customStyles}

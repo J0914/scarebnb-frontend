@@ -8,7 +8,7 @@ import styles from './BookingSidebar.module.css';
 import { createBooking } from "../../../store/bookings";
 
 
-const BookingSidebar = ({ range, haunt, nights }) => {
+const BookingSidebar = ({ handleScrollClick, range, haunt, nights }) => {
   const [check_in, setCheck_in] = useState('')
   const [check_out, setCheck_out] = useState('')
   const [num_guests, setNum_guests] = useState(1);
@@ -33,7 +33,11 @@ const BookingSidebar = ({ range, haunt, nights }) => {
     }
 
     if (range.from && range.to) {
-      setStayPrice((haunt.price * (nights.length -1)).toFixed(2))
+      let len = 1;
+      if (nights.length > 1){
+        len = nights.length - 1;
+      }
+      setStayPrice((haunt.price * len).toFixed(2))
       setCleaningFee((haunt.price * .8).toFixed(2))
       setScarebnbFee((haunt.price * .5).toFixed(2))
     } else {
@@ -72,12 +76,16 @@ const BookingSidebar = ({ range, haunt, nights }) => {
         num_guests
       }
 
-      await dispatch(createBooking(booking))
-      .then(() => {
-        localStorage.removeItem('selectedDayRange')
-        return history.push('/account')
-      })
-      .catch((err) => console.log(err))
+      if (window.confirm('Are you sure you want to book this haunt?')) {
+        await dispatch(createBooking(booking))
+        .then(() => {
+          localStorage.removeItem('selectedDayRange')
+          return history.push('/account')
+        })
+        .catch((err) => console.log(err))
+      } else {
+        return;
+      }
     }
   }
 
@@ -97,9 +105,11 @@ const BookingSidebar = ({ range, haunt, nights }) => {
             placeholder="Choose check-in date" 
             type="text" 
             value={check_in} 
+            onFocus={handleScrollClick}
             readOnly 
             />
             <input 
+            onFocus={handleScrollClick}
             placeholder="Choose checkout date" 
             type="text" 
             value={check_out} 
@@ -131,7 +141,7 @@ const BookingSidebar = ({ range, haunt, nights }) => {
             </div>
             :
             <div>
-              <button>Check availability</button>
+              <button onClick={handleScrollClick}>Check availability</button>
             </div>
           }
         </div>

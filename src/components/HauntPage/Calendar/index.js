@@ -5,7 +5,7 @@ import { Calendar, utils } from 'react-modern-calendar-datepicker';
 import styles from './Calendar.module.css'
 
 
-const CalendarView = ({nights, selectedDayRange, setSelectedDayRange}) => {
+const CalendarView = ({ref, nights, selectedDayRange, setSelectedDayRange}) => {
   const hauntBookings = useSelector(state => state.bookings.haunt)
   const [disabledDays, setDisabledDays] = useState([]);
 
@@ -43,6 +43,7 @@ const CalendarView = ({nights, selectedDayRange, setSelectedDayRange}) => {
 
   return (
     <Calendar
+      ref={ref}
       value={selectedDayRange}
       onChange={setSelectedDayRange}
       minimumDate={utils().getToday()}
