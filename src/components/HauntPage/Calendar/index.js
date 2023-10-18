@@ -28,12 +28,14 @@ const CalendarView = ({nights, selectedDayRange, setSelectedDayRange}) => {
         Object.values(hauntBookings).forEach((booking) => {
           let date = new Date(booking.check_in)
           let end = new Date(booking.check_out)
-          while (date.getDate() <= end.getDate()) {
+          while (date.getDate() !== end.getDate() + 1) {
             days.push({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() })
             let tomorrow = date;
             tomorrow.setDate(tomorrow.getDate() + 1)
             date = tomorrow;
           }
+          const today = new Date();
+          days.push({year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() })
           setDisabledDays(days);
         }) 
       }
@@ -45,7 +47,7 @@ const CalendarView = ({nights, selectedDayRange, setSelectedDayRange}) => {
       onChange={setSelectedDayRange}
       minimumDate={utils().getToday()}
       disabledDays={disabledDays}
-      onDisabledDayError={() => {window.alert('Sorry this day is already booked!')}}
+      onDisabledDayError={() => {window.alert('Whoops! This day is either in the past, or has already been booked!')}}
       shouldHighlightWeekends
       colorPrimary='orangered'
       colorPrimaryLight='rgba(255, 68, 0, 0.2)'

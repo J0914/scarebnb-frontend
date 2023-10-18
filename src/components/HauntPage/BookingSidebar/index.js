@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import PriceBreakdownModal from "./PriceBreakdownModal";
 import CleaningFeeModal from "./CleaningFeeModal";
 import ServiceFeeModal from "./ServiceFeeModal";
-import styles from './BookingSidebar.module.css'
+import styles from './BookingSidebar.module.css';
+import { createBooking } from "../../../store/bookings";
 
 
 const BookingSidebar = ({ range, haunt, nights }) => {
@@ -15,6 +17,8 @@ const BookingSidebar = ({ range, haunt, nights }) => {
   const [scarebnbFee, setScarebnbFee] = useState(0);
   const [total, setTotal] = useState(0);
   const sessionUser = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (range.from) {
@@ -56,18 +60,24 @@ const BookingSidebar = ({ range, haunt, nights }) => {
     setInput(prevNum => --prevNum)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!sessionUser) window.alert('Please login to book this haunt!')
     else {
       const booking = {
+        hauntId: haunt.id,
         check_in,
         check_out,
         num_guests
       }
 
-
+      await dispatch(createBooking(booking))
+      .then(() => {
+        localStorage.removeItem('selectedDayRange')
+        return history.push('/account')
+      })
+      .catch((err) => console.log(err))
     }
   }
 

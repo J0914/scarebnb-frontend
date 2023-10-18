@@ -2,6 +2,7 @@ import csrfFetch from "./csrf";
 
 const ADDHAUNTBOOKINGS = '/bookings/ADDHAUNTBOOKINGS'
 const ADDUSERBOOKINGS = '/bookings/ADDUSERBOOKINGS'
+const ADDSINGLEBOOKING = '/bookings/ADDSINGLEBOOKING'
 
 const addHauntBookings = (bookings) => ({
   type: ADDHAUNTBOOKINGS,
@@ -11,6 +12,11 @@ const addHauntBookings = (bookings) => ({
 const addUserBookings = (bookings) => ({
   type: ADDUSERBOOKINGS,
   bookings
+})
+
+const addSingleBooking = (booking) => ({
+  type: ADDSINGLEBOOKING,
+  booking
 })
 
 export const getHauntBookings = (hauntId) => async dispatch => {
@@ -28,6 +34,18 @@ export const getUserBookings = () => async dispatch => {
   if (res.ok){
     const bookings = await res.json();
     dispatch(addUserBookings(bookings))
+  }
+}
+
+export const createBooking = (booking) => async dispatch => {
+  const res = await csrfFetch(`/api/bookings/${booking.hauntId}`, {
+    method: 'POST',
+    body: JSON.stringify(booking)
+  });
+
+  if (res.ok){
+    const newBooking = await res.json();
+    dispatch(addSingleBooking(newBooking))
   }
 }
 
@@ -49,6 +67,13 @@ const bookingReducer = (state = {haunt: {}, user: {}}, action) => {
         action.bookings.forEach(booking => {
           newState.user[booking.id] = booking;
         });
+      }
+      return newState;
+    }
+    case ADDSINGLEBOOKING: {
+      const newState = {...state};
+      if (!newState.user[action.booking.id]){
+        newState.user[action.booking.id] = action.booking;
       }
       return newState;
     }
