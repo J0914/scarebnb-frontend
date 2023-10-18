@@ -2,25 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styles from './PriceBreakdownModal.module.css'
 
-const PriceBreakdownModal = ({ price, nights, range }) => {
+const PriceBreakdownModal = ({ price, nights }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [dates, setDates] = useState([]);
   const [totalBasePrice, setTotalBasePrice] = useState(0)
+  console.log('nights in pricebreakdown', nights)
 
   useEffect(() => {
-    if (range.from){
-      let rangeDates = [];
-      for (let i = 0; i < (range.to.day - range.from.day); i++){
-        rangeDates.push(`${range.from.month}/${range.from.day + i}/${range.from.year}`)
-      }
-      setDates(rangeDates)
-    } else {
-      setDates([])
-    }
-  }, [range])
-
-  useEffect(() => {
-    setTotalBasePrice(price * nights)
+    setTotalBasePrice(price * (nights.length -1))
   }, [price, nights])
 
   const setModalIsOpenToTrue = () => {
@@ -41,14 +29,12 @@ const PriceBreakdownModal = ({ price, nights, range }) => {
       flexDirection: 'column',
       borderRadius: '10px',
       top: '40%',
-      // overflow: 'auto',
-      // overflowX: 'hidden'
     },
   };
 
   return (
     <>
-      <span className={styles.modalOpenSpan} onClick={setModalIsOpenToTrue} >${price} x {nights} nights</span>
+      <span className={styles.modalOpenSpan} onClick={setModalIsOpenToTrue} >${price} x {nights.length - 1} nights</span>
       <Modal
         isOpen={modalIsOpen}
         style={customStyles}
@@ -62,12 +48,12 @@ const PriceBreakdownModal = ({ price, nights, range }) => {
             <span>Base Price Breakdown</span>
           </div>
           <div id={styles.breakdownContainer}>
-            {dates.map((date) => (
+            {nights.map((date) => (
               <div>
               <span>{date}</span>
               <span>${(price)}</span>
               </div>
-            ))}
+            )).slice(0, nights.length - 1)}
           </div>
           <div id={styles.breakdownFooter}>
             <span>Total Base Price</span>

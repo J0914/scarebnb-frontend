@@ -11,10 +11,9 @@ import { getHauntBookings } from '../../store/bookings';
 const HauntPage = ({ setIsHosting }) => {
   const { hauntId } = useParams();
   const selectedHaunt = useSelector(state => state.haunts[hauntId])
-  const hauntBookings = useSelector(state => state.bookings.haunt)
   const [haunt, setHaunt] = useState(selectedHaunt)
   const [selectedDayRange, setSelectedDayRange] = useState(JSON.parse(localStorage.getItem('selectedDayRange')) || { from: null, to: null })
-  const [nights, setNights] = useState(0)
+  const [nights, setNights] = useState([])
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,17 +25,23 @@ const HauntPage = ({ setIsHosting }) => {
     setHaunt(selectedHaunt);
   }, [selectedHaunt])
 
-  // useEffect(() => {
-  //   const days = [];
-  //   if (selectedDayRange.to && selectedDayRange.from){
-  //     const date = new Date(`${selectedDayRange.from.year}-${selectedDayRange.from.month}-${selectedDayRange.from.day}`);
-  //     while (date !== new Date(`${selectedDayRange.to.year}-${selectedDayRange.to.month}-${selectedDayRange.to.day}`))
-  //     days.push(date);
-  //     const tomorrow = date;
-  //     tomorrow.setDate(tomorrow.getDate() + 1)
-  //   }
+  useEffect(() => {
+    if (selectedDayRange.to && selectedDayRange.from) {
+      const days = [];
+      let date = new Date(`${selectedDayRange.from.year}/${selectedDayRange.from.month}/${selectedDayRange.from.day}`);
+      let end = new Date(`${selectedDayRange.to.year}/${selectedDayRange.to.month}/${selectedDayRange.to.day}`)
+      while (date.getDate() !== end.getDate() + 1) {
+        days.push(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+        let tomorrow = date;
+        tomorrow.setDate(tomorrow.getDate() + 1)
+        console.log('tomorrow', tomorrow)
+        date = tomorrow;
+      }
+      setNights(days)
+    } else setNights([])
+  }, [selectedDayRange])
 
-  // }, [selectedDayRange])
+  console.log('nights in hauntPage', nights)
 
   if (!selectedHaunt) {
     return <Redirect to='/page-not-found' />
@@ -75,11 +80,11 @@ const HauntPage = ({ setIsHosting }) => {
               </div>
             </div>
             <div id={styles.dateContainer}>
-              <CalendarView selectedDayRange={selectedDayRange} setSelectedDayRange={setSelectedDayRange} />
+              <CalendarView nights={nights} selectedDayRange={selectedDayRange} setSelectedDayRange={setSelectedDayRange} />
             </div>
           </div>
           <div id={styles.rightMid}>
-            <BookingSidebar range={selectedDayRange} haunt={haunt} />
+            <BookingSidebar nights={nights} range={selectedDayRange} haunt={haunt} />
           </div>
         </div>
         <div id={styles.reviewContainer}>

@@ -6,16 +6,14 @@ import ServiceFeeModal from "./ServiceFeeModal";
 import styles from './BookingSidebar.module.css'
 
 
-const BookingSidebar = ({ range, haunt }) => {
+const BookingSidebar = ({ range, haunt, nights }) => {
   const [check_in, setCheck_in] = useState('')
   const [check_out, setCheck_out] = useState('')
   const [num_guests, setNum_guests] = useState(1);
-  const [nights, setNights] = useState(0)
   const [stayPrice, setStayPrice] = useState(0)
   const [cleaningFee, setCleaningFee] = useState(0);
   const [scarebnbFee, setScarebnbFee] = useState(0);
   const [total, setTotal] = useState(0);
-  const [showPriceBreakdown, setShowPriceBreakdown] = useState('none')
   const sessionUser = useSelector(state => state.session.user)
 
   useEffect(() => {
@@ -31,18 +29,16 @@ const BookingSidebar = ({ range, haunt }) => {
     }
 
     if (range.from && range.to) {
-      setStayPrice((haunt.price * (range.to.day - range.from.day)).toFixed(2))
-      setNights(range.to.day - range.from.day)
+      setStayPrice((haunt.price * (nights.length -1)).toFixed(2))
       setCleaningFee((haunt.price * .8).toFixed(2))
       setScarebnbFee((haunt.price * .5).toFixed(2))
     } else {
       setStayPrice(0)
-      setNights(0)
       setCleaningFee(0)
       setScarebnbFee(0)
       setTotal(0)
     }
-  }, [range])
+  }, [range, nights])
 
   useEffect(() => {
     setTotal((parseFloat(stayPrice) + parseFloat(cleaningFee) + parseFloat(scarebnbFee)).toFixed(2))

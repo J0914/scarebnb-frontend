@@ -5,7 +5,7 @@ import { Calendar, utils } from 'react-modern-calendar-datepicker';
 import styles from './Calendar.module.css'
 
 
-const CalendarView = ({selectedDayRange, setSelectedDayRange}) => {
+const CalendarView = ({nights, selectedDayRange, setSelectedDayRange}) => {
   const hauntBookings = useSelector(state => state.bookings.haunt)
   const [disabledDays, setDisabledDays] = useState([]);
 
@@ -22,51 +22,22 @@ const CalendarView = ({selectedDayRange, setSelectedDayRange}) => {
   }, [selectedDayRange])
 
   useEffect(() => {
-    console.log(hauntBookings)
-    const toBeDisabled = [];
-    const disabled = [];
-
-    Object.values(hauntBookings).forEach(booking => {
-      const checkInYear = booking.check_in.slice(0,4)
-      const checkInMonth = booking.check_in.slice(5,7)
-      const checkInDay = booking.check_in.slice(8,10)
-      const checkOutYear = booking.check_out.slice(0,4)
-      const checkOutMonth = booking.check_out.slice(5,7)
-      const checkOutDay = booking.check_out.slice(8,10)
-      
-      toBeDisabled.push({check_in: {year: parseInt(checkInYear), month: parseInt(checkInMonth), day: parseInt(checkInDay)}, check_out: {year: parseInt(checkOutYear), month: parseInt(checkOutMonth), day: parseInt(checkOutDay)}})
-    })
-
-    console.log('toBeDisabled', toBeDisabled)
-    toBeDisabled.forEach(range => {
-      const date = new Date(`${range.check_in.year}-${range.check_in.month}-${range.check_in.day}`)
-      const tomorrow = date;
-      tomorrow.setDate(tomorrow.getDate() + 1)
-      console.log('month', tomorrow.getMonth() + 1)
-      console.log('day', tomorrow.getDate())
-      console.log('year', tomorrow.getFullYear())
-    })
-
-    // setDisabledDays(toBeDisabled)
+      if (hauntBookings){
+        console.log('haunt bookings', hauntBookings)
+        const days = [];
+        Object.values(hauntBookings).forEach((booking) => {
+          let date = new Date(booking.check_in)
+          let end = new Date(booking.check_out)
+          while (date.getDate() <= end.getDate()) {
+            days.push({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() })
+            let tomorrow = date;
+            tomorrow.setDate(tomorrow.getDate() + 1)
+            date = tomorrow;
+          }
+          setDisabledDays(days);
+        }) 
+      }
   }, [hauntBookings])
-  
-  // const disabledDays = [
-  //   {
-  //     year: 2019,
-  //     month: 3,
-  //     day: 20,
-  //   },
-  //   {
-  //     year: 2019,
-  //     month: 3,
-  //     day: 21,
-  //   },
-  //   {
-  //     year: 2019,
-  //     month: 3,
-  //     day: 7,
-  //   }
-  // ];
 
   return (
     <Calendar
@@ -74,6 +45,7 @@ const CalendarView = ({selectedDayRange, setSelectedDayRange}) => {
       onChange={setSelectedDayRange}
       minimumDate={utils().getToday()}
       disabledDays={disabledDays}
+      onDisabledDayError={() => {window.alert('Sorry this day is already booked!')}}
       shouldHighlightWeekends
       colorPrimary='orangered'
       colorPrimaryLight='rgba(255, 68, 0, 0.2)'
