@@ -8,3 +8,11 @@
   padding: 10px;
   margin: 10px;
 }
+
+#reviewBody{
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

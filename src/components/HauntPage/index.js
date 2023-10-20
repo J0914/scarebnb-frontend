@@ -92,7 +92,7 @@ const HauntPage = ({ setIsHosting }) => {
         </div>
         <div id={styles.reviewContainer}>
           {/* <span>{haunt.Reviews.length} reviews</span> */}
-          {haunt.Reviews.slice(0, 5).map(review => (
+          {haunt.Reviews.slice(0, 6).map(review => (
             <Review key={review.id} review={review} />
           ))}
         </div>

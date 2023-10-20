@@ -11,7 +11,7 @@ const Review = ({review}) => {
       <span>{review.User.first_name}</span>
       <span>{date}-{year}</span>
       </div>
-      <p>{review.body}</p>
+      <p id={styles.reviewBody}>{review.body}</p>
     </div>
   )
 };
