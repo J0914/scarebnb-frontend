@@ -37,6 +37,7 @@ const BookingView = ({ booking }) => {
 
   useEffect(() => {
     setReview(null)
+    setHasReviewed(false)
 
     haunt.Reviews.forEach(review => {
       if (review.User.id === sessionUser.id){

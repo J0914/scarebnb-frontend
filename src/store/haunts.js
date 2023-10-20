@@ -41,7 +41,7 @@ export const createReview = (review) => async dispatch => {
   })
 
   if (res.ok){
-    const haunt = res.json();
+    const haunt = await res.json();
     dispatch(addSingleHaunt(haunt))
     return haunt;
   } else return res
@@ -54,7 +54,7 @@ export const editReview = (review) => async dispatch => {
   })
 
   if (res.ok){
-    const haunt = res.json();
+    const haunt = await res.json();
     dispatch(addSingleHaunt(haunt))
     return haunt;
   } else return res
@@ -66,7 +66,7 @@ export const deleteReview = (review) => async dispatch => {
   })
 
   if (res.ok){
-    const haunt = res.json();
+    const haunt = await res.json();
     dispatch(addSingleHaunt(haunt))
     return haunt;
   } else return res
@@ -84,6 +84,9 @@ const hauntReducer = (state = {}, action) => {
     }
     case ADDSINGLE:{
       const newState = {...state};
+      if (newState[action.haunt.id]){
+        delete newState[action.haunt.id];
+      }
       newState[action.haunt.id] = action.haunt;
       return newState;
     }
