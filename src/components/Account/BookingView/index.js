@@ -36,9 +36,8 @@ const BookingView = ({ booking }) => {
   }, [booking])
 
   useEffect(() => {
-    setHasReviewed(false)
     setReview(null)
-    
+
     haunt.Reviews.forEach(review => {
       if (review.User.id === sessionUser.id){
         setHasReviewed(true);
@@ -46,7 +45,9 @@ const BookingView = ({ booking }) => {
       } 
     })
     
-  }, [haunt])
+  }, [haunt, hasReviewed])
+
+  // have to refresh to change review button and create not complete
 
 
   return (
@@ -61,7 +62,7 @@ const BookingView = ({ booking }) => {
         </div>
       </div>
     </NavLink>
-    {isCompleted && <ReviewModal hauntId={booking.hauntId} review={review} setReview={setReview} hasReviewed={hasReviewed} setHasReviewed={setHasReviewed} />}
+    {isCompleted && <ReviewModal hauntId={booking.hauntId} review={review} hasReviewed={hasReviewed} setHasReviewed={setHasReviewed} />}
     </div>
   )
 };

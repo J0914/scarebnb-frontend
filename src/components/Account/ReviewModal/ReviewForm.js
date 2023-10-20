@@ -4,7 +4,7 @@ import styles from './ReviewForm.module.css'
 import { createReview, editReview, deleteReview } from '../../../store/haunts'
 
 
-const ReviewForm = ({ setModalIsOpen, hauntId, review }) => {
+const ReviewForm = ({ setModalIsOpen, hauntId, review, hasReviewed, setHasReviewed }) => {
   const [body, setBody] = useState('')
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const ReviewForm = ({ setModalIsOpen, hauntId, review }) => {
 
     if (isDelete) {
       return dispatch(deleteReview(review))
+        .then(setHasReviewed(false))
         .then(setModalIsOpen(false))
         .catch(async (res) => {
           const data = await res.json();
@@ -37,7 +38,7 @@ const ReviewForm = ({ setModalIsOpen, hauntId, review }) => {
 
     console.log('The Review', review)
 
-    if (review) {
+    if (hasReviewed) {
       return dispatch(editReview(review))
         .then(setModalIsOpen(false))
         .catch(async (res) => {
@@ -46,6 +47,7 @@ const ReviewForm = ({ setModalIsOpen, hauntId, review }) => {
         });
     } else {
       return dispatch(createReview(review))
+        .then(setHasReviewed(true))
         .then(setModalIsOpen(false))
         .catch(async (res) => {
           const data = await res.json();
@@ -68,7 +70,7 @@ const ReviewForm = ({ setModalIsOpen, hauntId, review }) => {
         />
       </form>
       <div id={styles.buttonsContainer}>
-        {review && <button className={styles.reviewButtons} onClick={(e) =>handleSubmit(e, true)}>Delete</button>}
+        {review && <button className={styles.reviewButtons} onClick={(e) => handleSubmit(e, true)}>Delete</button>}
         <button className={review ? styles.reviewButtons : styles.submitButton} onClick={handleSubmit}>Submit</button>
       </div>
     </div>

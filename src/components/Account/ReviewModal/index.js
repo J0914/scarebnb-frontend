@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import ReviewForm from './ReviewForm';
 import styles from './ReviewForm.module.css'
 
-const ReviewModal = ({hauntId, review, hasReviewed}) => {
+const ReviewModal = ({hauntId, review, hasReviewed, setHasReviewed}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const setModalIsOpenToTrue = () => {
@@ -41,7 +41,7 @@ const ReviewModal = ({hauntId, review, hasReviewed}) => {
           <button onClick={setModalIsOpenToFalse} className="material-symbols-outlined">close</button>
         <span id={styles.reviewHeader}>How was your stay?</span>
         </div>
-        <ReviewForm setModalIsOpen={setModalIsOpen} hauntId={hauntId} review={review} />
+        <ReviewForm hasReviewed={hasReviewed} setHasReviewed={setHasReviewed} setModalIsOpen={setModalIsOpen} hauntId={hauntId} review={review} />
       </Modal>
     </>
   )
