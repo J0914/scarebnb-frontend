@@ -1,8 +1,13 @@
+#bookingViewContainer{
+  display: flex;
+  align-items: center;
+}
+
 #navLink{
   text-decoration: none;
   color: black;
   display: inline-flex;
-  width: 30vw;
+  width: fit-content;
 }
 
 #BookingView{

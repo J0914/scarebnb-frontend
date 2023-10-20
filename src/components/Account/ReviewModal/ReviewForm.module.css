@@ -1,0 +1,64 @@
+#formHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#formHeader>:first-child{
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+}
+
+#formHeader>:first-child:hover{
+  color: orangered;
+}
+
+#reviewHeader{
+  width: 100%;
+  text-align: center;
+  margin-right: 10px;
+}
+
+#bodyInput{
+  height: 30vh;
+  width: 30vw;
+  resize: none;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid rgb(240, 240, 240);
+  margin: 10px 0;
+}
+
+#buttonsContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewButton, .reviewButtons, .submitButton{
+  background-color: orangered;
+  color: white;
+  font-weight: bold;
+  border: none;
+  height: 35px;
+  text-align: left;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+}
+
+.reviewButtons, .submitButton{
+  margin: 0;
+}
+
+.submitButton{
+  margin-left: auto;
+}
+
+.reviewButton:hover, .reviewButtons:hover, .submitButton:hover{
+  background-color: rgb(240, 240, 240);
+  color: orangered;
+}
+

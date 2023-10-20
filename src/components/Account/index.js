@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import BookingView from "./BookingView";
+import styles from './Account.module.css'
 
 const AccountPage = ({ setIsHosting }) => {
   const userBookings = useSelector(state => state.bookings.user)
@@ -11,7 +12,7 @@ const AccountPage = ({ setIsHosting }) => {
     setIsHosting(false);
   }, [])
 
-  let tripContent = () => {
+  let upcomingTripContent = () => {
     if (!userBookings) {
       return (
         <div>
@@ -23,25 +24,58 @@ const AccountPage = ({ setIsHosting }) => {
       return (
         <div>
           <h3>Upcoming Trips</h3>
-          <div>
-            {userBookings.map(booking => (
-              <BookingView booking={booking} />
-            ))}
+          <div className={styles.tripView}>
+            {userBookings.map(booking => {
+              const today = new Date();
+              const checkout = new Date(booking.check_out)
+              if (today < checkout) {
+                return <BookingView booking={booking} />
+              }
+            })}
           </div>
         </div>
       )
     }
+  }
 
+  let completedTripContent = () => {
+    if (!userBookings) {
+      return (
+        <div>
+          <span>You haven't taken any trips yet!</span>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h3>Completed Trips</h3>
+          <div className={styles.tripView}>
+            {userBookings.map(booking => {
+              const today = new Date();
+              const checkout = new Date(booking.check_out)
+              if (today >= checkout) {
+                return (
+                  <div>
+                    <BookingView booking={booking} />
+                  </div>
+                )
+              }
+            })}
+          </div>
+        </div>
+      )
+    }
   }
 
 
   return (
-    <div>
+    <div id={styles.body}>
       <header>
         <h2>Trips</h2>
       </header>
-      <div>
-        {tripContent()}
+      <div >
+        {upcomingTripContent()}
+        {completedTripContent()}
       </div>
     </div>
   )

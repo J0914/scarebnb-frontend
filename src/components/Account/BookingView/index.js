@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from './BookingView.module.css'
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import ReviewModal from "../ReviewModal";
+
 
 
 const BookingView = ({ booking }) => {
@@ -11,11 +13,15 @@ const BookingView = ({ booking }) => {
   const [checkoutYear, setCheckoutYear] = useState('')
   const [checkoutMonth, setCheckoutMonth] = useState('');
   const [checkoutDay, setCheckoutDay] = useState('');
+  const [hasReviewed, setHasReviewed] = useState(false)
+  const [isCompleted, setIsCompleted] = useState(false)
+  const [review, setReview] = useState(null)
   const haunt = useSelector(state => state.haunts[booking.hauntId])
-  // console.log(booking)
+  const sessionUser = useSelector(state => state.session.user)
 
   useEffect(() => {
     if (booking) {
+      const today = new Date();
       const checkinDate = new Date(booking.check_in)
       const checkoutDate = new Date(booking.check_out)
       setCheckinYear(booking.check_in.slice(0, 4))
@@ -24,9 +30,27 @@ const BookingView = ({ booking }) => {
       setCheckoutYear(booking.check_out.slice(0, 4))
       setCheckoutMonth(checkoutDate.toLocaleString('default', { month: 'short' }))
       setCheckoutDay(booking.check_out.slice(8, 10))
+
+      if (today >= checkoutDate) setIsCompleted(true)
     }
   }, [booking])
+
+  useEffect(() => {
+    setHasReviewed(false)
+    setReview(null)
+    
+    haunt.Reviews.forEach(review => {
+      if (review.User.id === sessionUser.id){
+        setHasReviewed(true);
+        setReview(review)
+      } 
+    })
+    
+  }, [haunt])
+
+
   return (
+    <div id={styles.bookingViewContainer}>
     <NavLink id={styles.navLink} to={`/haunts/${haunt.id}`}>
       <div id={styles.BookingView}>
         <img id={styles.img} src={haunt.Images[0].url} />
@@ -37,6 +61,8 @@ const BookingView = ({ booking }) => {
         </div>
       </div>
     </NavLink>
+    {isCompleted && <ReviewModal hauntId={booking.hauntId} review={review} setReview={setReview} hasReviewed={hasReviewed} setHasReviewed={setHasReviewed} />}
+    </div>
   )
 };
 
