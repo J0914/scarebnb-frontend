@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import BookingView from "./BookingView";
@@ -6,11 +6,16 @@ import styles from './Account.module.css'
 
 const AccountPage = ({ setIsHosting }) => {
   const userBookings = useSelector(state => state.bookings.user)
+  const [bookings, setBookings] = useState(userBookings)
   console.log(userBookings)
 
   useEffect(() => {
     setIsHosting(false);
   }, [])
+
+  useEffect(() => {
+    setBookings(userBookings)
+  }, [userBookings])
 
   let upcomingTripContent = () => {
     if (!userBookings) {
@@ -25,7 +30,7 @@ const AccountPage = ({ setIsHosting }) => {
         <div>
           <h3>Upcoming Trips</h3>
           <div className={styles.tripView}>
-            {userBookings.map(booking => {
+            {bookings.map(booking => {
               const today = new Date();
               const checkout = new Date(booking.check_out)
               if (today < checkout) {

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styles from './BookingView.module.css'
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import ReviewModal from "../ReviewModal";
+import { deleteBooking } from "../../../store/bookings";
 
 
 
@@ -18,6 +19,7 @@ const BookingView = ({ booking }) => {
   const [review, setReview] = useState(null)
   const haunt = useSelector(state => state.haunts[booking.hauntId])
   const sessionUser = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (booking) {
@@ -48,8 +50,13 @@ const BookingView = ({ booking }) => {
     
   }, [haunt, hasReviewed])
 
-  // have to refresh to change review button and create not complete
+  const handleDelete = (e) => {
+    e.preventDefault();
 
+    if (window.confirm('Are you sure you want to delete this booking?')){
+      dispatch(deleteBooking(booking.id))
+    } else return;
+  }
 
   return (
     <div id={styles.bookingViewContainer}>
@@ -63,7 +70,11 @@ const BookingView = ({ booking }) => {
         </div>
       </div>
     </NavLink>
-    {isCompleted && <ReviewModal hauntId={booking.hauntId} review={review} hasReviewed={hasReviewed} setHasReviewed={setHasReviewed} />}
+    {isCompleted ? 
+    <ReviewModal hauntId={booking.hauntId} review={review} hasReviewed={hasReviewed} setHasReviewed={setHasReviewed} />
+    :
+    <button onClick={handleDelete}>Cancel</button>
+    }
     </div>
   )
 };

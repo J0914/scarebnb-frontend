@@ -3,6 +3,7 @@ import csrfFetch from "./csrf";
 const ADDHAUNTBOOKINGS = '/bookings/ADDHAUNTBOOKINGS'
 const ADDUSERBOOKINGS = '/bookings/ADDUSERBOOKINGS'
 const ADDSINGLEBOOKING = '/bookings/ADDSINGLEBOOKING'
+const DELETEBOOKING = '/bookings/DELETEBOOKING'
 
 const addHauntBookings = (bookings) => ({
   type: ADDHAUNTBOOKINGS,
@@ -17,6 +18,11 @@ const addUserBookings = (bookings) => ({
 const addSingleBooking = (booking) => ({
   type: ADDSINGLEBOOKING,
   booking
+})
+
+const deleteABooking = (bookingId) => ({
+  type: DELETEBOOKING,
+  bookingId
 })
 
 export const getHauntBookings = (hauntId) => async dispatch => {
@@ -49,6 +55,16 @@ export const createBooking = (booking) => async dispatch => {
   }
 }
 
+export const deleteBooking = (bookingId) => async dispatch => {
+  const res = await csrfFetch(`api/bookings/${bookingId}`, {
+    method: 'DELETE'
+  })
+
+  if (res.ok){
+    dispatch(deleteABooking(bookingId))
+  }
+}
+
 
 const bookingReducer = (state = {haunt: {}, user: []}, action) => {
   switch (action.type){
@@ -71,6 +87,11 @@ const bookingReducer = (state = {haunt: {}, user: []}, action) => {
       if (!newState.user[action.booking.id]){
         newState.user[action.booking.id] = action.booking;
       }
+      return newState;
+    }
+    case DELETEBOOKING: {
+      const newState = {...state};
+      delete newState[action.bookingId];
       return newState;
     }
     default:
