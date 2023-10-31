@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './ReviewForm.module.css'
-import { createReview, editReview, deleteReview } from '../../../store/haunts'
+import { createReview, editReview, deleteReview } from '../../../store/reviews'
 
 
 const ReviewForm = ({ setModalIsOpen, hauntId, review, hasReviewed, setHasReviewed }) => {
@@ -9,10 +9,7 @@ const ReviewForm = ({ setModalIsOpen, hauntId, review, hasReviewed, setHasReview
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (review)
-      setBody(review.body)
-  }, [])
+  // todo get the review
 
   const handleSubmit = (e, isDelete) => {
     e.preventDefault();
@@ -57,7 +54,7 @@ const ReviewForm = ({ setModalIsOpen, hauntId, review, hasReviewed, setHasReview
   }
 
   return (
-    <div>
+    review && <div>
       <form>
         <ul>
           {errors.length > 0 && errors.map((error, idx) => <li className={styles.errors} key={idx}>{error}</li>)}

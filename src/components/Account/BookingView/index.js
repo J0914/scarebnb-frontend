@@ -19,6 +19,7 @@ const BookingView = ({ booking }) => {
   const [review, setReview] = useState(null)
   const haunt = useSelector(state => state.haunts[booking.hauntId])
   const sessionUser = useSelector(state => state.session.user)
+  const reviews = useSelector(state => state.reviews)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,24 +38,15 @@ const BookingView = ({ booking }) => {
     }
   }, [booking])
 
-  useEffect(() => {
-    setReview(null)
-    setHasReviewed(false)
-
-    haunt.Reviews.forEach(review => {
-      if (review.User.id === sessionUser.id){
-        setHasReviewed(true);
-        setReview(review)
-      } 
-    })
-    
-  }, [haunt, hasReviewed])
+  // todo create useEffect for the review
 
   const handleDelete = (e) => {
     e.preventDefault();
 
     if (window.confirm('Are you sure you want to delete this booking?')){
       dispatch(deleteBooking(booking.id))
+      setReview(null);
+      setHasReviewed(false)
     } else return;
   }
 

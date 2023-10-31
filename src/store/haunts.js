@@ -34,45 +34,6 @@ export const createHaunt = (haunt) => async dispatch => {
   }
 };
 
-export const createReview = (review) => async dispatch => {
-  const res = await csrfFetch(`/api/reviews/${review.hauntId}`, {
-    method: 'POST',
-    body: JSON.stringify(review)
-  })
-
-  if (res.ok){
-    const haunt = await res.json();
-    dispatch(addSingleHaunt(haunt))
-    return haunt;
-  } else return res
-}
-
-export const editReview = (review) => async dispatch => {
-  const res = await csrfFetch(`/api/reviews/${review.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(review)
-  })
-
-  if (res.ok){
-    const haunt = await res.json();
-    dispatch(addSingleHaunt(haunt))
-    return haunt;
-  } else return res
-}
-
-export const deleteReview = (review) => async dispatch => {
-  const res = await csrfFetch(`/api/reviews/${review.id}`, {
-    method: 'DELETE'
-  })
-
-  if (res.ok){
-    const haunt = await res.json();
-    dispatch(addSingleHaunt(haunt))
-    return haunt;
-  } else return res
-};
-
-
 const hauntReducer = (state = {}, action) => {
   switch (action.type){
     case ADDHAUNTS:{

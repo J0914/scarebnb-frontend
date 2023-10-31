@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import ReviewForm from './ReviewForm';
 import styles from './ReviewForm.module.css'
+import { useSelector } from 'react-redux';
 
 const ReviewModal = ({hauntId, review, hasReviewed, setHasReviewed}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);

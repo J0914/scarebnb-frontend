@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import BookingView from "./BookingView";
+import { getReviews } from "../../store/reviews";
 import styles from './Account.module.css'
 
 const AccountPage = ({ setIsHosting }) => {
   const userBookings = useSelector(state => state.bookings.user)
   const [bookings, setBookings] = useState(userBookings)
-  console.log(userBookings)
+  const sessionUser = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsHosting(false);
+    dispatch(getReviews(sessionUser.id))
   }, [])
 
   useEffect(() => {
